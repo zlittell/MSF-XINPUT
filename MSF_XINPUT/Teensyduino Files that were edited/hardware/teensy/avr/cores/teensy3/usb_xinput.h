@@ -29,7 +29,7 @@ public:
 	int send(const void *buffer, uint16_t timeout) { return usb_xinput_send(buffer, timeout); }
 };
 
-extern usb_xinput_class XInput;
+extern usb_xinput_class XInputUSB;
 
 #endif // __cplusplus
 
