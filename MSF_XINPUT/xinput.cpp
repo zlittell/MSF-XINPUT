@@ -90,10 +90,7 @@ void XINPUT::buttonUpdate(uint8_t button, uint8_t buttonState)
 		TXData[BUTTON_PACKET_2] |= LOGO_MASK;
 	}
 	//Unknown Button
-	else 
-	{
-		
-	}
+	else {}
 }
 
 //Update dpad values in the packet
@@ -143,10 +140,7 @@ void XINPUT::stickUpdate(uint8_t analogStick, uint8_t stickXDirValue, uint8_t st
 		TXData[RIGHT_STICK_Y_PACKET_LSB] = lowByte(stickYDirValue);
 		TXData[RIGHT_STICK_Y_PACKET_MSB] = highByte(stickYDirValue);
 	}
-	else
-	{
-		//invalid parameter
-	}
+	else{/*invalid parameter*/}
 }
 
 //Send an update packet to the PC
@@ -192,16 +186,10 @@ uint8_t XINPUT::receiveXinput()
 		}
 		
 		//Some other command we don't parse came through
-		else
-		{
-			return 3;
-		}
+		else{return 3;}
 	}
 	//Packet not available return 0
-	else
-	{
-		return 0;
-	}
+	else{return 0;}
 }
 
 //Set the LED mode and pin settings
@@ -256,10 +244,7 @@ void XINPUT::LEDUpdate()
 		//if we increased ledtracker to 10, it needs to rollover
 		if (_LEDtracker==10) {_LEDtracker=0;}
 	}
-	else
-	{
-		//LED mode is NO_LED
-	}
+	else{/*LED mode is NO_LED*/}
 }
 
 //Select the correct LED pattern according to received packets
