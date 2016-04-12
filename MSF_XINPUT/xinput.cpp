@@ -29,6 +29,20 @@
 #include "Arduino.h"
 #include "xinput.h"
 
+//Main constructor
+//If LED mode is NO_LED there is no need to pass a pin
+XINPUT::XINPUT(uint8_t LEDMode)
+{
+	setLEDMode(LEDMode);
+}
+
+//Main constructor
+//If using an LED a pin is needed
+XINPUT::XINPUT(uint8_t LEDMode, uint8_t LEDPin)
+{
+	setLEDMode(LEDMode, LEDPin);
+}
+
 //Update button in packet
 //Buttons L3,R3,START,BACK are in Packet 1
 //Buttons A,B,X,Y,LB,RB,LOGO are in Packet 2
@@ -37,57 +51,135 @@ void XINPUT::buttonUpdate(uint8_t button, uint8_t buttonState)
 	//BUTTON_A
 	if (button == BUTTON_A)
 	{
-		TXData[BUTTON_PACKET_2] |= A_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= A_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= A_MASK_OFF;
+		}
 	}
 	//BUTTON_B
 	else if(button == BUTTON_B)
 	{
-		TXData[BUTTON_PACKET_2] |= B_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= B_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= B_MASK_OFF;
+		}
 	}
 	//BUTTON_X
 	else if(button == BUTTON_X)
 	{
-		TXData[BUTTON_PACKET_2] |= X_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= X_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= X_MASK_OFF;
+		}
 	}
 	//BUTTON_Y
 	else if(button == BUTTON_Y)
 	{
-		TXData[BUTTON_PACKET_2] |= Y_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= Y_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= Y_MASK_OFF;
+		}
 	}
 	//BUTTON_LB
 	else if(button == BUTTON_LB)
 	{
-		TXData[BUTTON_PACKET_2] |= LB_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= LB_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= LB_MASK_OFF;
+		}
+		
 	}
 	//BUTTON_RB
 	else if(button == BUTTON_RB)
 	{
-		TXData[BUTTON_PACKET_2] |= RB_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= RB_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= RB_MASK_OFF;
+		}
 	}
 	//BUTTON_L3
 	else if(button == BUTTON_L3)
 	{
-		TXData[BUTTON_PACKET_1] |= L3_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_1] |= L3_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_1] &= L3_MASK_OFF;
+		}
 	}
 	//BUTTON_R3
 	else if(button == BUTTON_R3)
 	{
-		TXData[BUTTON_PACKET_1] |= R3_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_1] |= R3_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_1] &= R3_MASK_OFF;
+		}
 	}
 	//BUTTON_START
 	else if(button == BUTTON_START)
 	{
-		TXData[BUTTON_PACKET_1] |= START_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_1] |= START_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_1] &= START_MASK_OFF;
+		}
 	}
 	//BUTTON_BACK
 	else if(button == BUTTON_BACK)
 	{
-		TXData[BUTTON_PACKET_1] |= BACK_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_1] |= BACK_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_1] &= BACK_MASK_OFF;
+		}
 	}
 	//BUTTON_LOGO
 	else if(button == BUTTON_LOGO)
 	{
-		TXData[BUTTON_PACKET_2] |= LOGO_MASK;
+		if(buttonState)
+		{
+			TXData[BUTTON_PACKET_2] |= LOGO_MASK_ON;
+		}
+		else
+		{
+			TXData[BUTTON_PACKET_2] &= LOGO_MASK_OFF;
+		}
 	}
 	//Unknown Button
 	else {}
@@ -99,14 +191,16 @@ void XINPUT::buttonUpdate(uint8_t button, uint8_t buttonState)
 //SOCD makes fightsticks tournament legal and helps prevent erroneous states 
 void XINPUT::dpadUpdate(uint8_t dpadUP, uint8_t dpadDOWN, uint8_t dpadLEFT, uint8_t dpadRIGHT)
 {
+	//Clear DPAD
+	TXData[BUTTON_PACKET_1] &= DPAD_MASK_OFF;
 	//DPAD Up
-	if (dpadUP) {TXData[BUTTON_PACKET_1] |= DPAD_UP_MASK;}
+	if (dpadUP) {TXData[BUTTON_PACKET_1] |= DPAD_UP_MASK_ON;}
 	//DPAD Down
-	if (dpadDOWN && !dpadUP) {TXData[BUTTON_PACKET_1] |= DPAD_DOWN_MASK;}
+	if (dpadDOWN && !dpadUP) {TXData[BUTTON_PACKET_1] |= DPAD_DOWN_MASK_ON;}
 	//DPAD Left
-	if (dpadLEFT && !dpadRIGHT) {TXData[BUTTON_PACKET_1] |= DPAD_LEFT_MASK;}
+	if (dpadLEFT && !dpadRIGHT) {TXData[BUTTON_PACKET_1] |= DPAD_LEFT_MASK_ON;}
 	//DPAD Right
-	if (dpadRIGHT && !dpadLEFT) {TXData[BUTTON_PACKET_1] |= DPAD_RIGHT_MASK;}
+	if (dpadRIGHT && !dpadLEFT) {TXData[BUTTON_PACKET_1] |= DPAD_RIGHT_MASK_ON;}
 }
 
 //Update the trigger values in the packet		
@@ -120,7 +214,7 @@ void XINPUT::triggerUpdate(uint8_t triggerLeftValue, uint8_t triggerRightValue)
 //Analog Sticks
 //Each axis is a signed 16 bit integer
 //-32,768 to 32,767 is the range of value
-void XINPUT::stickUpdate(uint8_t analogStick, uint8_t stickXDirValue, uint8_t stickYDirValue)
+void XINPUT::stickUpdate(uint8_t analogStick, int16_t stickXDirValue, int16_t stickYDirValue)
 {
 	if (analogStick == STICK_LEFT)
 	{
@@ -147,7 +241,7 @@ void XINPUT::stickUpdate(uint8_t analogStick, uint8_t stickXDirValue, uint8_t st
 void XINPUT::sendXinput()
 {
 	//Send TXData
-	XInput.send(TXData, USB_TIMEOUT);
+	XInputUSB.send(TXData, USB_TIMEOUT);
 	
 	//Zero out data
 	//Start at 2 so that you can keep the message type and packet size
@@ -158,10 +252,10 @@ void XINPUT::sendXinput()
 uint8_t XINPUT::receiveXinput()
 {
 	//Check if packet available
-	if (XInput.available() > 0)
+	if (XInputUSB.available() > 0)
 	{
 		//Grab packet and store it in RXData array
-		XInput.recv(RXData, USB_TIMEOUT);
+		XInputUSB.recv(RXData, USB_TIMEOUT);
 		
 		//If the data is a rumble command parse it
 		//Rumble Command
@@ -193,23 +287,28 @@ uint8_t XINPUT::receiveXinput()
 }
 
 //Set the LED mode and pin settings
+//Passed single arguments
+void XINPUT::setLEDMode(uint8_t LEDMode)
+{
+	//Check LED mode
+	if (LEDMode == NO_LED)
+	{
+		//Invalid entry or No Led
+		_modeLED = NO_LED;	//Clear LED Mode
+		_pinLED = NO_LED;	//Clear LED Pin
+	}
+	else{/*User gave incorrect mode with no pin*/}
+}
+//Passed both arguments
 void XINPUT::setLEDMode(uint8_t LEDMode, uint8_t LEDPin)
 {
 	//Check LED mode
-	if (LEDMode == ONBOARD_LED)
+	if (LEDMode == LED_ENABLED)
 	{
-		//Onboard LED
+		//LED ENABLED
 		pinMode(LEDPin, OUTPUT);	//Set pin output mode
 		digitalWrite(LEDPin, LOW);	//Set pin low initially to turn light off
-		_modeLED = ONBOARD_LED;		//Set LED Mode
-		_pinLED = LEDPin;			//Set LED Pin
-	}
-	else if (LEDMode == EXTERNAL_LED)
-	{
-		//External LED
-		pinMode(LEDPin, OUTPUT);	//Set pin output mode
-		digitalWrite(LEDPin, LOW);	//Set pin low initially to turn light off
-		_modeLED = EXTERNAL_LED;	//Set LED Mode
+		_modeLED = LED_ENABLED;		//Set LED Mode
 		_pinLED = LEDPin;			//Set LED Pin
 	}
 	else
@@ -223,7 +322,7 @@ void XINPUT::setLEDMode(uint8_t LEDMode, uint8_t LEDPin)
 //Process and update the current LED Pattern
 void XINPUT::LEDUpdate()
 {
-	if ((_modeLED == ONBOARD_LED)|(_modeLED == EXTERNAL_LED))
+	if (_modeLED == LED_ENABLED)
 	{
 		//Grab the current time in mS that the program has been running
 		uint32_t currentMS = millis();

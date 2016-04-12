@@ -54,24 +54,39 @@
 #define ALTERNATE 0x0D
 //LED STYLE DEFINES
 #define NO_LED 0
-#define ONBOARD_LED 1
-#define EXTERNAL_LED 2
+#define LED_ENABLED 1
 //BUTTON MASK DEFINES
-#define R3_MASK 0x80
-#define L3_MASK 0x40
-#define BACK_MASK 0x20
-#define START_MASK 0x10
-#define DPAD_RIGHT_MASK 0x08
-#define DPAD_LEFT_MASK 0x04
-#define DPAD_DOWN_MASK 0x02
-#define DPAD_UP_MASK 0x01
-#define Y_MASK 0x80
-#define X_MASK 0x40
-#define B_MASK 0x20
-#define A_MASK 0x10
-#define LOGO_MASK 0x04
-#define RB_MASK 0x02
-#define LB_MASK 0x01
+#define R3_MASK_ON 0x80
+#define R3_MASK_OFF 0x7F
+#define L3_MASK_ON 0x40
+#define L3_MASK_OFF 0xBF
+#define BACK_MASK_ON 0x20
+#define BACK_MASK_OFF 0xDF
+#define START_MASK_ON 0x10
+#define START_MASK_OFF 0xEF
+#define DPAD_RIGHT_MASK_ON 0x08
+#define DPAD_RIGHT_MASK_OFF 0xF7
+#define DPAD_LEFT_MASK_ON 0x04
+#define DPAD_LEFT_MASK_OFF 0xFB
+#define DPAD_DOWN_MASK_ON 0x02
+#define DPAD_DOWN_MASK_OFF 0xFD
+#define DPAD_UP_MASK_ON 0x01
+#define DPAD_UP_MASK_OFF 0xFE
+#define Y_MASK_ON 0x80
+#define Y_MASK_OFF 0x7F
+#define X_MASK_ON 0x40
+#define X_MASK_OFF 0xBF
+#define B_MASK_ON 0x20
+#define B_MASK_OFF 0xDF
+#define A_MASK_ON 0x10
+#define A_MASK_OFF 0xEF
+#define LOGO_MASK_ON 0x04
+#define LOGO_MASK_OFF 0xFB
+#define RB_MASK_ON 0x02
+#define RB_MASK_OFF 0xFD
+#define LB_MASK_ON 0x01
+#define LB_MASK_OFF 0xFE
+#define DPAD_MASK_OFF 0xF0
 //Byte location Definitions
 #define BUTTON_PACKET_1 2
 #define BUTTON_PACKET_2 3
@@ -111,6 +126,9 @@ class XINPUT
 {
 	//Public variables and functions
 	public:
+		//Constructor
+		XINPUT(uint8_t LEDMode);
+		XINPUT(uint8_t LEDMode, uint8_t LEDPin);
 		//Data 
 		uint8_t TXData[20] = {0x00, 0x14, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB transmit packet data
 		uint8_t RXData[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB receive packet data
@@ -123,11 +141,14 @@ class XINPUT
 		uint8_t patternPlayer3[10] = {1,0,1,0,1,0,0,0,0,0};
 		uint8_t patternPlayer4[10] = {1,0,1,0,1,0,1,0,0,0};
 		uint8_t patternCurrent[10] = {0,0,0,0,0,0,0,0,0,0};	//Variabled to hold the current pattern selected by the host
+		//Functions
 		void buttonUpdate(uint8_t button, uint8_t buttonState);
+		void dpadUpdate(uint8_t dpadUP, uint8_t dpadDOWN, uint8_t dpadLEFT, uint8_t dpadRIGHT);
 		void triggerUpdate(uint8_t triggerLeftValue, uint8_t triggerRightValue);
-		void stickUpdate(uint8_t analogStick, uint8_t stickXDirValue, uint8_t stickYDirValue);
+		void stickUpdate(uint8_t analogStick, int16_t stickXDirValue, int16_t stickYDirValue);
 		void sendXinput();
 		uint8_t receiveXinput();
+		void setLEDMode(uint8_t LEDMode);
 		void setLEDMode(uint8_t LEDMode, uint8_t LEDPin);
 		void LEDUpdate();
 		void bootloaderJump();
@@ -141,7 +162,7 @@ class XINPUT
 		uint32_t _previousMS = 0; //used to store the last time LED was updated
 		uint8_t _LEDtracker = 0;	//used as an index to step through a pattern on interval
 		void LEDPatternSelect(uint8_t rxPattern);
-}
+};
 
 
 #endif
