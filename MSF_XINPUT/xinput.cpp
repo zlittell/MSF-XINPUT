@@ -30,62 +30,64 @@
 #include "xinput.h"
 
 //Update button in packet
+//Buttons L3,R3,START,BACK are in Packet 1
+//Buttons A,B,X,Y,LB,RB,LOGO are in Packet 2
 void XINPUT::buttonUpdate(uint8_t button, uint8_t buttonState)
 {
 	//BUTTON_A
 	if (button == BUTTON_A)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= A_MASK;
 	}
 	//BUTTON_B
 	else if(button == BUTTON_B)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= B_MASK;
 	}
 	//BUTTON_X
 	else if(button == BUTTON_X)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= X_MASK;
 	}
 	//BUTTON_Y
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_Y)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= Y_MASK;
 	}
 	//BUTTON_LB
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_LB)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= LB_MASK;
 	}
 	//BUTTON_RB
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_RB)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= RB_MASK;
 	}
 	//BUTTON_L3
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_L3)
 	{
-		
+		TXData[BUTTON_PACKET_1] |= L3_MASK;
 	}
 	//BUTTON_R3
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_R3)
 	{
-		
+		TXData[BUTTON_PACKET_1] |= R3_MASK;
 	}
 	//BUTTON_START
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_START)
 	{
-		
+		TXData[BUTTON_PACKET_1] |= START_MASK;
 	}
 	//BUTTON_BACK
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_BACK)
 	{
-		
+		TXData[BUTTON_PACKET_1] |= BACK_MASK;
 	}
 	//BUTTON_LOGO
-	else if(button == BUTTON_X)
+	else if(button == BUTTON_LOGO)
 	{
-		
+		TXData[BUTTON_PACKET_2] |= LOGO_MASK;
 	}
 	//Unknown Button
 	else 
@@ -330,3 +332,9 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 	}
 }
 
+//Include function to jump to the bootloader easily
+//Even though its only one line of code its still nice to have built in
+void XINPUT::bootloaderJump()
+{
+	_reboot_Teensyduino_();
+}

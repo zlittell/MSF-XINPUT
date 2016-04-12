@@ -130,6 +130,7 @@ class XINPUT
 		uint8_t receiveXinput();
 		void setLEDMode(uint8_t LEDMode, uint8_t LEDPin);
 		void LEDUpdate();
+		void bootloaderJump();
 		
 	//Private variables and functions
 	private:
