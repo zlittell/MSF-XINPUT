@@ -145,6 +145,7 @@ class XINPUT
 		void buttonUpdate(uint8_t button, uint8_t buttonState);
 		void dpadUpdate(uint8_t dpadUP, uint8_t dpadDOWN, uint8_t dpadLEFT, uint8_t dpadRIGHT);
 		void triggerUpdate(uint8_t triggerLeftValue, uint8_t triggerRightValue);
+		void singleTriggerUpdate(uint8_t trigger, uint8_t triggerValue);
 		void stickUpdate(uint8_t analogStick, int16_t stickXDirValue, int16_t stickYDirValue);
 		void sendXinput();
 		uint8_t receiveXinput();

@@ -211,6 +211,21 @@ void XINPUT::triggerUpdate(uint8_t triggerLeftValue, uint8_t triggerRightValue)
 	TXData[RIGHT_TRIGGER_PACKET] = triggerRightValue;
 }
 
+//Update a single trigger value in the packet		
+//0x00 to 0xFF
+void XINPUT::singleTriggerUpdate(uint8_t trigger, uint8_t triggerValue)
+{
+	if (trigger == TRIGGER_LEFT)
+	{
+		TXData[LEFT_TRIGGER_PACKET] = triggerValue;
+	}
+	else if (trigger == TRIGGER_RIGHT)
+	{
+		TXData[RIGHT_TRIGGER_PACKET] = triggerValue;
+	}
+	else{/*invalid parameter*/}
+}
+
 //Analog Sticks
 //Each axis is a signed 16 bit integer
 //-32,768 to 32,767 is the range of value
