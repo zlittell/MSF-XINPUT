@@ -11,16 +11,18 @@ XINPUT	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-buttonUpdate	KEYWORD2
-dpadUpdate	KEYWORD2
-triggerUpdate	KEYWORD2
-stickUpdate	KEYWORD2
-sendXinput	KEYWORD2
-receiveXinput	KEYWORD2
-setLEDMode	KEYWORD2
-setLEDMode	KEYWORD2
-LEDUpdate	KEYWORD2
-bootloaderJump	KEYWORD2
+buttonUpdate		KEYWORD2
+dpadUpdate		KEYWORD2
+triggerUpdate		KEYWORD2
+stickUpdate		KEYWORD2
+sendXinput		KEYWORD2
+receiveXinput		KEYWORD2
+setLEDMode		KEYWORD2
+setLEDMode		KEYWORD2
+LEDUpdate		KEYWORD2
+bootloaderJump		KEYWORD2
+singleTriggerUpdate	KEYWORD2
+currentPlayer		KEYWORD2
 
 ######################################
 # Constants (LITERAL1)

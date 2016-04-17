@@ -388,7 +388,9 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 		//Copy the pattern array into the current pattern
 		memcpy(patternCurrent, patternBlinkRotate, 10);
 		//Reset the index to beginning of pattern
-		_LEDtracker = 0;	
+		_LEDtracker = 0;
+		//Set the current player to 0 to indicate not being handshaked completely yet
+		currentPlayer = 0;
 	}
 	//Device is player 1
 	else if ((rxPattern==FLASHON1)||(rxPattern==ON1))
@@ -397,6 +399,8 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 		memcpy(patternCurrent, patternPlayer1, 10);
 		//Reset the index to beginning of pattern
 		_LEDtracker = 0;
+		//Set the current player to 1
+		currentPlayer = 1;
 	}
 	//Device is player 2
 	else if ((rxPattern==FLASHON2)||(rxPattern==ON2))
@@ -405,6 +409,8 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 		memcpy(patternCurrent, patternPlayer2, 10);
 		//Reset the index to beginning of pattern
 		_LEDtracker = 0;
+		//Set the current player to 2
+		currentPlayer = 2;
 	}
 	//Device is player 3
 	else if ((rxPattern==FLASHON3)||(rxPattern==ON3))
@@ -413,6 +419,8 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 		memcpy(patternCurrent, patternPlayer3, 10);
 		//Reset the index to beginning of pattern
 		_LEDtracker = 0;
+		//Set the current player to 3
+		currentPlayer = 3;
 	}
 	//Device is player 4
 	else if ((rxPattern==FLASHON4)||(rxPattern==ON4))
@@ -421,6 +429,8 @@ void XINPUT::LEDPatternSelect(uint8_t rxPattern)
 		memcpy(patternCurrent, patternPlayer4, 10);
 		//Reset the index to beginning of pattern
 		_LEDtracker = 0;
+		//Set the current player to 4
+		currentPlayer = 4;
 	}
 	//If pattern is not specified perform no pattern
 	else

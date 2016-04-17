@@ -130,9 +130,8 @@ class XINPUT
 		XINPUT(uint8_t LEDMode);
 		XINPUT(uint8_t LEDMode, uint8_t LEDPin);
 		//Data 
-		uint8_t TXData[20] = {0x00, 0x14, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB transmit packet data
-		uint8_t RXData[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB receive packet data
 		uint8_t rumbleValues[2] = {0x00,0x00};	//Array to hold values for rumble motors. rumbleValues[0] is big weight rumbleValues[1] is small weight
+		uint8_t currentPlayer = 0;	//Variable to access the current controller number attached to this device.  0 is no controller number assigned by host yet
 		//LED Patterns
 		uint8_t patternAllOff[10] = {0,0,0,0,0,0,0,0,0,0};
 		uint8_t patternBlinkRotate[10] = {1,0,1,0,1,0,1,0,1,0};
@@ -156,6 +155,9 @@ class XINPUT
 		
 	//Private variables and functions
 	private:
+		//Data
+		uint8_t TXData[20] = {0x00, 0x14, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB transmit packet data
+		uint8_t RXData[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  //Holds USB receive packet data
 		//LED Pattern Tracking
 		uint8_t _modeLED = 0;	//Track LED mode
 		uint8_t _pinLED = 0;		//Track LED pin
