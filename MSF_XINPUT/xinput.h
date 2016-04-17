@@ -142,6 +142,7 @@ class XINPUT
 		uint8_t patternCurrent[10] = {0,0,0,0,0,0,0,0,0,0};	//Variabled to hold the current pattern selected by the host
 		//Functions
 		void buttonUpdate(uint8_t button, uint8_t buttonState);
+		void buttonArrayUpdate(uint8_t buttonArray[11]);
 		void dpadUpdate(uint8_t dpadUP, uint8_t dpadDOWN, uint8_t dpadLEFT, uint8_t dpadRIGHT);
 		void triggerUpdate(uint8_t triggerLeftValue, uint8_t triggerRightValue);
 		void singleTriggerUpdate(uint8_t trigger, uint8_t triggerValue);

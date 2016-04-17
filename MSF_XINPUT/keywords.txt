@@ -23,6 +23,7 @@ LEDUpdate		KEYWORD2
 bootloaderJump		KEYWORD2
 singleTriggerUpdate	KEYWORD2
 currentPlayer		KEYWORD2
+buttonArrayUpdate	KEYWORD2
 
 ######################################
 # Constants (LITERAL1)

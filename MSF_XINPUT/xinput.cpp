@@ -185,6 +185,46 @@ void XINPUT::buttonUpdate(uint8_t button, uint8_t buttonState)
 	else {}
 }
 
+//Update all buttons with a single array
+//Order is as follows A,B,X,Y,LB,RB,L3,R3,START,BACK,LOGO
+//11 buttons 0-10 in the array
+void XINPUT::buttonArrayUpdate(uint8_t buttonArray[11])
+{
+	//BUTTON_A
+	if (buttonArray[0]){TXData[BUTTON_PACKET_2] |= A_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= A_MASK_OFF;}
+	//BUTTON_B
+	if(buttonArray[1]){TXData[BUTTON_PACKET_2] |= B_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= B_MASK_OFF;}
+	//BUTTON_X
+	if(buttonArray[2]){TXData[BUTTON_PACKET_2] |= X_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= X_MASK_OFF;}
+	//BUTTON_Y
+	if(buttonArray[3]){TXData[BUTTON_PACKET_2] |= Y_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= Y_MASK_OFF;}
+	//BUTTON_LB
+	if(buttonArray[4]){TXData[BUTTON_PACKET_2] |= LB_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= LB_MASK_OFF;}
+	//BUTTON_RB
+	if(buttonArray[5]){TXData[BUTTON_PACKET_2] |= RB_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= RB_MASK_OFF;}
+	//BUTTON_L3
+	if(buttonArray[6]){TXData[BUTTON_PACKET_1] |= L3_MASK_ON;}
+	else{TXData[BUTTON_PACKET_1] &= L3_MASK_OFF;}
+	//BUTTON_R3
+	if(buttonArray[7]){TXData[BUTTON_PACKET_1] |= R3_MASK_ON;}
+	else{TXData[BUTTON_PACKET_1] &= R3_MASK_OFF;}
+	//BUTTON_START
+	if(buttonArray[8]){TXData[BUTTON_PACKET_1] |= START_MASK_ON;}
+	else{TXData[BUTTON_PACKET_1] &= START_MASK_OFF;}
+	//BUTTON_BACK
+	if(buttonArray[9]){TXData[BUTTON_PACKET_1] |= BACK_MASK_ON;}
+	else{TXData[BUTTON_PACKET_1] &= BACK_MASK_OFF;}
+	//BUTTON_LOGO
+	if(buttonArray[10]){TXData[BUTTON_PACKET_2] |= LOGO_MASK_ON;}
+	else{TXData[BUTTON_PACKET_2] &= LOGO_MASK_OFF;}
+}
+
 //Update dpad values in the packet
 //SOCD cleaner included
 //Programmed behavior is UP+DOWN=UP and LEFT+RIGHT=NEUTRAL
