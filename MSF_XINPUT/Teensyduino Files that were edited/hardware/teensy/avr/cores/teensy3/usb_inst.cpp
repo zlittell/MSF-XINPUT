@@ -74,6 +74,7 @@ usb_serial_class Serial;
 
 #ifdef USB_XINPUT
 	usb_xinput_class XInput;
+	usb_serial_class Serial;
 #endif
 
 
