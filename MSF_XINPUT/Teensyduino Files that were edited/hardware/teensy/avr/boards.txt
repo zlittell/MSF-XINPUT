@@ -47,6 +47,9 @@ teensy31.menu.usb.rawhid.fake_serial=teensy_gateway
 teensy31.menu.usb.flightsim=Flight Sim Controls
 teensy31.menu.usb.flightsim.build.usbtype=USB_FLIGHTSIM
 teensy31.menu.usb.flightsim.fake_serial=teensy_gateway
+teensy31.menu.usb.xinput=[MSF] Shoryuken! (XINPUT DEVICE)
+teensy31.menu.usb.xinput.build.usbtype=USB_XINPUT
+teensy31.menu.usb.xinput.fake_serial=teensy_gateway
 teensy31.menu.usb.disable=No USB
 teensy31.menu.usb.disable.build.usbtype=USB_DISABLED
 #uncomment these if you want to try faster overclocking
