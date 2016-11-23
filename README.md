@@ -4,6 +4,10 @@ Working on moving the work I did in our FightStick project into being an easier 
 This should assist in creating some really cool and unique controllers.  Especially with VR headsets coming out all year.
 
 <b>UPDATE</b><br />
+I have updated the board.txt file to include the menu option for the Teensy 3.1 and 3.2 platform!  Support for these boards is now working!  Huge thanks to Luis Salvador from PinballSP for figuring it out and sending the code snippet to my email!
+<br /><b>/UPDATE</b>
+
+<b>UPDATE</b><br />
 The first version of the user guide for this library has been completed.
 This should provide a decent explanation of the functions available to the user from the library.
 <br /><b>/UPDATE</b>
