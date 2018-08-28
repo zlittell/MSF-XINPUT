@@ -77,3 +77,16 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.zip
+
+# Teensy Core Subtree
+**/cores/*
+!**/cores/teensy3/
+**/cores/teensy3/*
+
+!**/cores/teensy3/usb_desc.c
+!**/cores/teensy3/usb_desc.h
+!**/cores/teensy3/usb_xinput.c
+!**/cores/teensy3/usb_xinput.h
+!**/cores/teensy3/usb_inst.cpp
+!**/cores/teensy3/usb_serial.h
+!**/cores/teensy3/WProgram.h
