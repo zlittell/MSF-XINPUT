@@ -23,8 +23,8 @@ teensy36.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy36.build.flags.dep=-MMD
 teensy36.build.flags.optimize=-Os
 teensy36.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=141
-teensy36.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -fno-rtti
+teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=142
+teensy36.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -Wno-error=narrowing -fno-rtti
 teensy36.build.flags.c=
 teensy36.build.flags.S=-x assembler-with-cpp
 teensy36.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk66fx1m0.ld" -lstdc++
@@ -207,7 +207,7 @@ teensy36.menu.keys.usint.build.keylayout=US_INTERNATIONAL
 
 teensy35.name=Teensy 3.5
 teensy35.upload.maximum_size=524288
-teensy35.upload.maximum_data_size=196608
+teensy35.upload.maximum_data_size=262136
 teensy35.upload.tool=teensyloader
 teensy35.upload.protocol=halfkay
 teensy35.build.board=TEENSY35
@@ -225,8 +225,8 @@ teensy35.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy35.build.flags.dep=-MMD
 teensy35.build.flags.optimize=-Os
 teensy35.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=141
-teensy35.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -fno-rtti
+teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=142
+teensy35.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -Wno-error=narrowing -fno-rtti
 teensy35.build.flags.c=
 teensy35.build.flags.S=-x assembler-with-cpp
 teensy35.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk64fx512.ld" -lstdc++
@@ -419,8 +419,8 @@ teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy31.build.flags.dep=-MMD
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=141
-teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -fno-rtti
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=142
+teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -Wno-error=narrowing -fno-rtti
 teensy31.build.flags.c=
 teensy31.build.flags.S=-x assembler-with-cpp
 teensy31.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk20dx256.ld" -lstdc++
@@ -627,8 +627,8 @@ teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy30.build.flags.dep=-MMD
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=141
-teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -fno-rtti
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=142
+teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -Wno-error=narrowing -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
 teensy30.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk20dx128.ld" -lstdc++
@@ -785,8 +785,8 @@ teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdlib
 teensyLC.build.flags.dep=-MMD
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus -fsingle-precision-constant
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=141
-teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -fno-rtti
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=142
+teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++14 -Wno-error=narrowing -fno-rtti
 teensyLC.build.flags.c=
 teensyLC.build.flags.S=-x assembler-with-cpp
 teensyLC.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mkl26z64.ld" -lstdc++
@@ -938,7 +938,7 @@ teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensypp2.build.flags.dep=-MMD
 teensypp2.build.flags.optimize=-Os
 teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=141 -DARDUINO_ARCH_AVR
+teensypp2.build.flags.defs=-DTEENSYDUINO=142 -DARDUINO_ARCH_AVR
 teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11
 teensypp2.build.flags.c=
 teensypp2.build.flags.S=-x assembler-with-cpp
@@ -1054,7 +1054,7 @@ teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensy2.build.flags.dep=-MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=141 -DARDUINO_ARCH_AVR
+teensy2.build.flags.defs=-DTEENSYDUINO=142 -DARDUINO_ARCH_AVR
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp

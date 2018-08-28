@@ -289,7 +289,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define KEYMEDIA_INTERVAL     4
   #define MULTITOUCH_INTERFACE  3	// Touchscreen
   #define MULTITOUCH_ENDPOINT   5
-  #define MULTITOUCH_SIZE       9
+  #define MULTITOUCH_SIZE       8
   #define MULTITOUCH_FINGERS    10
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
@@ -329,7 +329,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define MOUSE_INTERVAL        2
   #define MULTITOUCH_INTERFACE  4	// Touchscreen
   #define MULTITOUCH_ENDPOINT   5
-  #define MULTITOUCH_SIZE       9
+  #define MULTITOUCH_SIZE       8
   #define MULTITOUCH_FINGERS    10
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
@@ -589,7 +589,8 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
 
 #elif defined(USB_FLIGHTSIM_JOYSTICK)
   #define VENDOR_ID		0x16C0
-  #define PRODUCT_ID		0x04D9
+  #define PRODUCT_ID		0x0488
+  #define BCD_DEVICE		0x0211
   #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
   #define MANUFACTURER_NAME_LEN	11
   #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','F','l','i','g','h','t',' ','S','i','m',' ','C','o','n','t','r','o','l','s'}
@@ -846,7 +847,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define AUDIO_SYNC_ENDPOINT	14
   #define MULTITOUCH_INTERFACE  12	// Touchscreen
   #define MULTITOUCH_ENDPOINT   15
-  #define MULTITOUCH_SIZE       9
+  #define MULTITOUCH_SIZE       8
   #define MULTITOUCH_FINGERS    10
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE

@@ -68,7 +68,7 @@
 static uint8_t device_descriptor[] = {
         18,                                     // bLength
         1,                                      // bDescriptorType
-        0x01, 0x01,                             // bcdUSB
+        0x10, 0x01,                             // bcdUSB
 #ifdef DEVICE_CLASS
         DEVICE_CLASS,                           // bDeviceClass
 #else
@@ -90,7 +90,22 @@ static uint8_t device_descriptor[] = {
 #ifdef BCD_DEVICE
 	LSB(BCD_DEVICE), MSB(BCD_DEVICE),       // bcdDevice
 #else
+  // For USB types that don't explicitly define BCD_DEVICE,
+  // use the minor version number to help teensy_ports
+  // identify which Teensy model is used.
+  #if defined(__MKL26Z64__)
+        0x73, 0x02,
+  #elif defined(__MK20DX128__)
+        0x74, 0x02,
+  #elif defined(__MK20DX256__)
+        0x75, 0x02,
+  #elif defined(__MK64FX512__)
+        0x76, 0x02,
+  #elif defined(__MK66FX1M0__)
+        0x77, 0x02,
+  #else
         0x00, 0x02,
+  #endif
 #endif
         1,                                      // iManufacturer
         2,                                      // iProduct
@@ -354,12 +369,12 @@ static uint8_t multitouch_report_desc[] = {
         0x75, 0x01,                     //     Report Size (1)
         0x95, 0x01,                     //     Report Count (1)
         0x81, 0x02,                     //     Input (variable,absolute)
-        0x09, 0x30,                     //     Usage (Pressure)
+        0x09, 0x51,                     //     Usage (Contact Identifier)
         0x25, 0x7F,                     //     Logical Maximum (127)
         0x75, 0x07,                     //     Report Size (7)
         0x95, 0x01,                     //     Report Count (1)
         0x81, 0x02,                     //     Input (variable,absolute)
-        0x09, 0x51,                     //     Usage (Contact Identifier)
+        0x09, 0x30,                     //     Usage (Pressure)
         0x26, 0xFF, 0x00,               //     Logical Maximum (255)
         0x75, 0x08,                     //     Report Size (8)
         0x95, 0x01,                     //     Report Count (1)
@@ -378,11 +393,6 @@ static uint8_t multitouch_report_desc[] = {
         0x75, 0x10,                     //   Report Size (16)
         0x95, 0x01,                     //   Report Count (1)
         0x09, 0x56,                     //   Usage (Scan Time)
-        0x81, 0x02,                     //   Input (variable,absolute)
-        0x09, 0x54,                     //   Usage (Contact Count)
-        0x25, MULTITOUCH_FINGERS,       //   Logical Maximum (10)
-        0x75, 0x08,                     //   Report Size (8)
-        0x95, 0x01,                     //   Report Count (1)
         0x81, 0x02,                     //   Input (variable,absolute)
         0x05, 0x0D,                     //   Usage Page (Digitizers)
         0x09, 0x55,                     //   Usage (Contact Count Maximum)
