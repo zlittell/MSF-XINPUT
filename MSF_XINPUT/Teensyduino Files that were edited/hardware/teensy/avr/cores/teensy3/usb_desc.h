@@ -304,6 +304,36 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
 
+#elif defined(USB_XINPUT)
+  #define DEVICE_CLASS	0xFF
+  #define DEVICE_SUBCLASS	0xFF
+  #define DEVICE_PROTOCOL	0xFF
+  #define DEVICE_VERSION 0x0114
+  #define DEVICE_ATTRIBUTES 0xA0
+  #define DEVICE_POWER	0xFA
+  #define VENDOR_ID		0x045e
+  #define PRODUCT_ID		0x028e
+  #define MANUFACTURER_NAME	{'©','M','i','c','r','o','s','o','f','t'}
+  #define MANUFACTURER_NAME_LEN	10
+  #define PRODUCT_NAME		{'C','o','n','t','r','o','l','l','e','r'}
+  #define PRODUCT_NAME_LEN	10
+  #define EP0_SIZE	8
+  #define NUM_ENDPOINTS	6
+  #define NUM_USB_BUFFERS	24
+  #define NUM_INTERFACE	4
+  #define XINPUT_INTERFACE	0
+  #define XINPUT_RX_ENDPOINT	2
+  #define XINPUT_RX_SIZE 8
+  #define XINPUT_TX_ENDPOINT	1
+  #define XINPUT_TX_SIZE 20
+  #define CONFIG_DESC_SIZE 153
+  #define ENDPOINT1_CONFIG ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT5_CONFIG ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT6_CONFIG ENDPOINT_TRANSIMIT_ONLY
+  
 #endif
 
 #ifdef USB_DESC_LIST_DEFINE
