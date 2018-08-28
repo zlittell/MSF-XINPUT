@@ -21,9 +21,11 @@ teensy31.build.command.size=arm-none-eabi-size
 teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=122
-#uncomment this line and remove the one above, for use with Visual Micro
-#teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=122 -DF_CPU=96000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=123
+#for use with Visual Micro, uncomment these lines and remove the one above
+#teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=123 -DF_CPU=96000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+#teensy31.build.flags.ldspecs=
+#teensy31.build.flags.optimize=-O
 teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy31.build.flags.c=
 teensy31.build.flags.S=-x assembler-with-cpp
@@ -86,7 +88,7 @@ teensy31.menu.speed.72opt.build.flags.ldspecs=
 teensy31.menu.speed.48opt.build.fcpu=48000000
 teensy31.menu.speed.48opt.build.flags.optimize=-O
 teensy31.menu.speed.48opt.build.flags.ldspecs=
-teensy31.menu.speed.24opt.build.fcpu=48000000
+teensy31.menu.speed.24opt.build.fcpu=24000000
 teensy31.menu.speed.24opt.build.flags.optimize=-O
 teensy31.menu.speed.24opt.build.flags.ldspecs=
 teensy31.menu.speed.96.build.fcpu=96000000
@@ -189,7 +191,7 @@ teensy30.build.command.size=arm-none-eabi-size
 teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=122
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=123
 teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
@@ -292,16 +294,17 @@ teensyLC.build.command.objdump=arm-none-eabi-objdump
 teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=122
-#uncomment this line and remove the one above, for use with Visual Micro
-#teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=122 -DF_CPU=48000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=123
+#for use with Visual Micro, uncomment these lines and remove the one above
+#teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=123 -DF_CPU=48000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+#teensyLC.build.flags.ldspecs=--specs=nano.specs
+#teensyLC.build.flags.optimize=-Os
 teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensyLC.build.flags.c=
 teensyLC.build.flags.S=-x assembler-with-cpp
 teensyLC.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mkl26z64.ld"
 teensyLC.build.flags.libs=-larm_cortexM0l_math -lm
 teensyLC.serial.restart_cmd=false
-
 teensyLC.menu.usb.serial=Serial
 teensyLC.menu.usb.serial.build.usbtype=USB_SERIAL
 teensyLC.menu.usb.hid=Keyboard + Mouse + Joystick
@@ -410,7 +413,7 @@ teensy2.build.command.size=avr-size
 teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=122
+teensy2.build.flags.defs=-DTEENSYDUINO=123
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp
@@ -524,7 +527,7 @@ teensypp2.build.command.size=avr-size
 teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD
 teensypp2.build.flags.optimize=-Os
 teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=122
+teensypp2.build.flags.defs=-DTEENSYDUINO=123
 teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensypp2.build.flags.c=
 teensypp2.build.flags.S=-x assembler-with-cpp
