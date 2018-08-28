@@ -23,8 +23,8 @@ teensy36.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy36.build.flags.dep=-MMD
 teensy36.build.flags.optimize=-Os
 teensy36.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=136
-teensy36.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
+teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=137
+teensy36.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11 -fno-rtti
 teensy36.build.flags.c=
 teensy36.build.flags.S=-x assembler-with-cpp
 teensy36.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk66fx1m0.ld"
@@ -57,6 +57,9 @@ teensy36.menu.usb.audio.build.usbtype=USB_AUDIO
 teensy36.menu.usb.audio.fake_serial=teensy_gateway
 teensy36.menu.usb.serialmidiaudio=Serial + MIDI + Audio
 teensy36.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
+teensy36.menu.usb.mtp=MTP Disk (Experimental)
+teensy36.menu.usb.mtp.build.usbtype=USB_MTPDISK
+teensy36.menu.usb.mtp.fake_serial=teensy_gateway
 teensy36.menu.usb.rawhid=Raw HID
 teensy36.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy36.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -205,8 +208,8 @@ teensy35.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy35.build.flags.dep=-MMD
 teensy35.build.flags.optimize=-Os
 teensy35.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=136
-teensy35.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
+teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=137
+teensy35.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11 -fno-rtti
 teensy35.build.flags.c=
 teensy35.build.flags.S=-x assembler-with-cpp
 teensy35.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk64fx512.ld"
@@ -239,6 +242,9 @@ teensy35.menu.usb.audio.build.usbtype=USB_AUDIO
 teensy35.menu.usb.audio.fake_serial=teensy_gateway
 teensy35.menu.usb.serialmidiaudio=Serial + MIDI + Audio
 teensy35.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
+teensy35.menu.usb.mtp=MTP Disk (Experimental)
+teensy35.menu.usb.mtp.build.usbtype=USB_MTPDISK
+teensy35.menu.usb.mtp.fake_serial=teensy_gateway
 teensy35.menu.usb.rawhid=Raw HID
 teensy35.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy35.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -379,8 +385,8 @@ teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy31.build.flags.dep=-MMD
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=136
-teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=137
+teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11 -fno-rtti
 teensy31.build.flags.c=
 teensy31.build.flags.S=-x assembler-with-cpp
 teensy31.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk20dx256.ld"
@@ -412,6 +418,9 @@ teensy31.menu.usb.audio.build.usbtype=USB_AUDIO
 teensy31.menu.usb.audio.fake_serial=teensy_gateway
 teensy31.menu.usb.serialmidiaudio=Serial + MIDI + Audio
 teensy31.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
+teensy31.menu.usb.mtp=MTP Disk (Experimental)
+teensy31.menu.usb.mtp.build.usbtype=USB_MTPDISK
+teensy31.menu.usb.mtp.fake_serial=teensy_gateway
 teensy31.menu.usb.rawhid=Raw HID
 teensy31.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy31.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -566,8 +575,8 @@ teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy30.build.flags.dep=-MMD
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=136
-teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=137
+teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11 -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
 teensy30.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk20dx128.ld"
@@ -598,6 +607,9 @@ teensy30.menu.usb.audio.build.usbtype=USB_AUDIO
 teensy30.menu.usb.audio.fake_serial=teensy_gateway
 teensy30.menu.usb.serialmidiaudio=Serial + MIDI + Audio
 teensy30.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
+teensy30.menu.usb.mtp=MTP Disk (Experimental)
+teensy30.menu.usb.mtp.build.usbtype=USB_MTPDISK
+teensy30.menu.usb.mtp.fake_serial=teensy_gateway
 teensy30.menu.usb.rawhid=Raw HID
 teensy30.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy30.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -716,8 +728,8 @@ teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdlib
 teensyLC.build.flags.dep=-MMD
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus -fsingle-precision-constant
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=136
-teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=137
+teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++11 -fno-rtti
 teensyLC.build.flags.c=
 teensyLC.build.flags.S=-x assembler-with-cpp
 teensyLC.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mkl26z64.ld"
@@ -741,6 +753,9 @@ teensyLC.menu.usb.midi.build.usbtype=USB_MIDI
 teensyLC.menu.usb.midi.fake_serial=teensy_gateway
 teensyLC.menu.usb.serialmidi=Serial + MIDI
 teensyLC.menu.usb.serialmidi.build.usbtype=USB_MIDI_SERIAL
+teensyLC.menu.usb.mtp=MTP Disk (Experimental)
+teensyLC.menu.usb.mtp.build.usbtype=USB_MTPDISK
+teensyLC.menu.usb.mtp.fake_serial=teensy_gateway
 teensyLC.menu.usb.rawhid=Raw HID
 teensyLC.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensyLC.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -861,7 +876,7 @@ teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensypp2.build.flags.dep=-MMD
 teensypp2.build.flags.optimize=-Os
 teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=136 -DARDUINO_ARCH_AVR
+teensypp2.build.flags.defs=-DTEENSYDUINO=137 -DARDUINO_ARCH_AVR
 teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensypp2.build.flags.c=
 teensypp2.build.flags.S=-x assembler-with-cpp
@@ -977,7 +992,7 @@ teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensy2.build.flags.dep=-MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=136 -DARDUINO_ARCH_AVR
+teensy2.build.flags.defs=-DTEENSYDUINO=137 -DARDUINO_ARCH_AVR
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp

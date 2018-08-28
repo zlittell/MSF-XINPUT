@@ -1,6 +1,6 @@
 /* Teensyduino Core Library
  * http://www.pjrc.com/teensy/
- * Copyright (c) 2013 PJRC.COM, LLC.
+ * Copyright (c) 2017 PJRC.COM, LLC.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -958,7 +958,7 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
         0x06,                                   // bInterfaceClass (0x06 = still image)
         0x01,                                   // bInterfaceSubClass
         0x01,                                   // bInterfaceProtocol
-        0,                                      // iInterface
+        4,                                      // iInterface
         // endpoint descriptor, USB spec 9.6.6, page 269-271, Table 9-13
         7,                                      // bLength
         5,                                      // bDescriptorType
@@ -1424,6 +1424,13 @@ struct usb_string_descriptor_struct usb_string_xinput_security_descriptor = {
 		0x72, 0x00, 0x65, 0x00, 0x73, 0x00, 0x65, 0x00, 0x72, 0x00, 0x76, 0x00, 0x65, 0x00, 0x64, 0x00,
 		0x2E, 0x00}
 		};
+#ifdef MTP_INTERFACE
+struct usb_string_descriptor_struct usb_string_mtp = {
+	2 + 3 * 2,
+	3,
+	{'M','T','P'}
+};
+#endif
 
 void usb_init_serialnumber(void)
 {
@@ -1501,6 +1508,9 @@ const usb_descriptor_list_t usb_descriptor_list[] = {
 #ifdef MULTITOUCH_INTERFACE
         {0x2200, MULTITOUCH_INTERFACE, multitouch_report_desc, sizeof(multitouch_report_desc)},
         {0x2100, MULTITOUCH_INTERFACE, config_descriptor+MULTITOUCH_HID_DESC_OFFSET, 9},
+#endif
+#ifdef MTP_INTERFACE
+	{0x0304, 0x0409, (const uint8_t *)&usb_string_mtp, 0},
 #endif
         {0x0300, 0x0000, (const uint8_t *)&string0, 0},
         {0x0301, 0x0409, (const uint8_t *)&usb_string_manufacturer_name, 0},
