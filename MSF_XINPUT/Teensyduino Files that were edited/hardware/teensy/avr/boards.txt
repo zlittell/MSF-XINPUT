@@ -23,16 +23,24 @@ teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy31.build.flags.dep=-MMD
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=128
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=129
 teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy31.build.flags.c=
 teensy31.build.flags.S=-x assembler-with-cpp
 teensy31.build.flags.ld=-Wl,--gc-sections,--relax,--defsym=__rtc_localtime={extra.time.local} "-T{build.core.path}/mk20dx256.ld"
 teensy31.build.flags.libs=-larm_cortexM4l_math -lm
 teensy31.serial.restart_cmd=false
-
 teensy31.menu.usb.serial=Serial
 teensy31.menu.usb.serial.build.usbtype=USB_SERIAL
+teensy31.menu.usb.keyboard=Keyboard
+teensy31.menu.usb.keyboard.build.usbtype=USB_KEYBOARDONLY
+teensy31.menu.usb.keyboard.fake_serial=teensy_gateway
+teensy31.menu.usb.touch=Keyboard + Touch Screen
+teensy31.menu.usb.touch.build.usbtype=USB_TOUCHSCREEN
+teensy31.menu.usb.touch.fake_serial=teensy_gateway
+teensy31.menu.usb.hidtouch=Keyboard + Mouse + Touch Screen
+teensy31.menu.usb.hidtouch.build.usbtype=USB_HID_TOUCHSCREEN
+teensy31.menu.usb.hidtouch.fake_serial=teensy_gateway
 teensy31.menu.usb.hid=Keyboard + Mouse + Joystick
 teensy31.menu.usb.hid.build.usbtype=USB_HID
 teensy31.menu.usb.hid.fake_serial=teensy_gateway
@@ -41,15 +49,27 @@ teensy31.menu.usb.serialhid.build.usbtype=USB_SERIAL_HID
 teensy31.menu.usb.midi=MIDI
 teensy31.menu.usb.midi.build.usbtype=USB_MIDI
 teensy31.menu.usb.midi.fake_serial=teensy_gateway
+teensy31.menu.usb.serialmidi=Serial + MIDI
+teensy31.menu.usb.serialmidi.build.usbtype=USB_MIDI_SERIAL
+teensy31.menu.usb.audio=Audio
+teensy31.menu.usb.audio.build.usbtype=USB_AUDIO
+teensy31.menu.usb.audio.fake_serial=teensy_gateway
+teensy31.menu.usb.serialmidiaudio=Serial + MIDI + Audio
+teensy31.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
 teensy31.menu.usb.rawhid=Raw HID
 teensy31.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy31.menu.usb.rawhid.fake_serial=teensy_gateway
 teensy31.menu.usb.flightsim=Flight Sim Controls
 teensy31.menu.usb.flightsim.build.usbtype=USB_FLIGHTSIM
 teensy31.menu.usb.flightsim.fake_serial=teensy_gateway
+teensy31.menu.usb.flightsimjoystick=Flight Sim Controls + Joystick
+teensy31.menu.usb.flightsimjoystick.build.usbtype=USB_FLIGHTSIM_JOYSTICK
+teensy31.menu.usb.flightsimjoystick.fake_serial=teensy_gateway
 teensy31.menu.usb.xinput=[MSF] XINPUT Controller
 teensy31.menu.usb.xinput.build.usbtype=USB_XINPUT
 teensy31.menu.usb.xinput.fake_serial=teensy_gateway
+teensy31.menu.usb.everything=All of the Above
+teensy31.menu.usb.everything.build.usbtype=USB_EVERYTHING
 teensy31.menu.usb.disable=No USB
 teensy31.menu.usb.disable.build.usbtype=USB_DISABLED
 #uncomment these if you want to try faster overclocking
@@ -166,11 +186,6 @@ teensy31.menu.keys.usint=US International
 teensy31.menu.keys.usint.build.keylayout=US_INTERNATIONAL
 
 
-
-
-
-
-
 teensy30.name=Teensy 3.0
 teensy30.upload.maximum_size=131072
 teensy30.upload.maximum_data_size=16384
@@ -191,7 +206,7 @@ teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy30.build.flags.dep=-MMD
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=128
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=129
 teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
@@ -202,14 +217,27 @@ teensy30.serial.restart_cmd=false
 
 teensy30.menu.usb.serial=Serial
 teensy30.menu.usb.serial.build.usbtype=USB_SERIAL
+teensy30.menu.usb.keyboard=Keyboard
+teensy30.menu.usb.keyboard.build.usbtype=USB_KEYBOARDONLY
+teensy30.menu.usb.keyboard.fake_serial=teensy_gateway
 teensy30.menu.usb.hid=Keyboard + Mouse + Joystick
 teensy30.menu.usb.hid.build.usbtype=USB_HID
 teensy30.menu.usb.hid.fake_serial=teensy_gateway
 teensy30.menu.usb.serialhid=Serial + Keyboard + Mouse + Joystick
 teensy30.menu.usb.serialhid.build.usbtype=USB_SERIAL_HID
+teensy30.menu.usb.touch=Keyboard + Touch Screen
+teensy30.menu.usb.touch.build.usbtype=USB_TOUCHSCREEN
+teensy30.menu.usb.touch.fake_serial=teensy_gateway
 teensy30.menu.usb.midi=MIDI
 teensy30.menu.usb.midi.build.usbtype=USB_MIDI
 teensy30.menu.usb.midi.fake_serial=teensy_gateway
+teensy30.menu.usb.serialmidi=Serial + MIDI
+teensy30.menu.usb.serialmidi.build.usbtype=USB_MIDI_SERIAL
+teensy30.menu.usb.audio=Audio
+teensy30.menu.usb.audio.build.usbtype=USB_AUDIO
+teensy30.menu.usb.audio.fake_serial=teensy_gateway
+teensy30.menu.usb.serialmidiaudio=Serial + MIDI + Audio
+teensy30.menu.usb.serialmidiaudio.build.usbtype=USB_MIDI_AUDIO_SERIAL
 teensy30.menu.usb.rawhid=Raw HID
 teensy30.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensy30.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -296,7 +324,7 @@ teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdlib
 teensyLC.build.flags.dep=-MMD
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus -fsingle-precision-constant
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=128
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=129
 teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensyLC.build.flags.c=
 teensyLC.build.flags.S=-x assembler-with-cpp
@@ -305,14 +333,22 @@ teensyLC.build.flags.libs=-larm_cortexM0l_math -lm
 teensyLC.serial.restart_cmd=false
 teensyLC.menu.usb.serial=Serial
 teensyLC.menu.usb.serial.build.usbtype=USB_SERIAL
+teensyLC.menu.usb.keyboard=Keyboard
+teensyLC.menu.usb.keyboard.build.usbtype=USB_KEYBOARDONLY
+teensyLC.menu.usb.keyboard.fake_serial=teensy_gateway
 teensyLC.menu.usb.hid=Keyboard + Mouse + Joystick
 teensyLC.menu.usb.hid.build.usbtype=USB_HID
 teensyLC.menu.usb.hid.fake_serial=teensy_gateway
 teensyLC.menu.usb.serialhid=Serial + Keyboard + Mouse + Joystick
 teensyLC.menu.usb.serialhid.build.usbtype=USB_SERIAL_HID
+teensyLC.menu.usb.touch=Keyboard + Touch Screen
+teensyLC.menu.usb.touch.build.usbtype=USB_TOUCHSCREEN
+teensyLC.menu.usb.touch.fake_serial=teensy_gateway
 teensyLC.menu.usb.midi=MIDI
 teensyLC.menu.usb.midi.build.usbtype=USB_MIDI
 teensyLC.menu.usb.midi.fake_serial=teensy_gateway
+teensyLC.menu.usb.serialmidi=Serial + MIDI
+teensyLC.menu.usb.serialmidi.build.usbtype=USB_MIDI_SERIAL
 teensyLC.menu.usb.rawhid=Raw HID
 teensyLC.menu.usb.rawhid.build.usbtype=USB_RAWHID
 teensyLC.menu.usb.rawhid.fake_serial=teensy_gateway
@@ -393,6 +429,122 @@ teensyLC.menu.keys.usint=US International
 teensyLC.menu.keys.usint.build.keylayout=US_INTERNATIONAL
 
 
+teensypp2.name=Teensy++ 2.0
+teensypp2.upload.maximum_size=130048
+teensypp2.upload.maximum_data_size=8192
+teensypp2.upload.tool=teensyloader
+teensypp2.upload.protocol=halfkay
+teensypp2.build.board=TEENSY2PP
+teensypp2.build.core=teensy
+teensypp2.build.mcu=at90usb1286
+teensypp2.build.warn_data_percentage=94
+teensypp2.build.toolchain=avr/bin/
+teensypp2.build.command.gcc=avr-gcc
+teensypp2.build.command.g++=avr-g++
+teensypp2.build.command.ar=avr-ar
+teensypp2.build.command.objcopy=avr-objcopy
+teensypp2.build.command.objdump=avr-objdump
+teensypp2.build.command.size=avr-size
+teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
+teensypp2.build.flags.dep=-MMD
+teensypp2.build.flags.optimize=-Os
+teensypp2.build.flags.cpu=-mmcu=at90usb1286
+teensypp2.build.flags.defs=-DTEENSYDUINO=129 -DARDUINO_ARCH_AVR
+teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
+teensypp2.build.flags.c=
+teensypp2.build.flags.S=-x assembler-with-cpp
+teensypp2.build.flags.ld=-Wl,--gc-sections,--relax
+teensypp2.build.flags.ldspecs=
+teensypp2.build.flags.libs=-lm
+teensypp2.build.serial_number=true
+teensypp2.serial.restart_cmd=true
+
+teensypp2.menu.usb.serial=Serial
+teensypp2.menu.usb.serial.build.usbtype=USB_SERIAL
+teensypp2.menu.usb.hid=Keyboard + Mouse + Joystick
+teensypp2.menu.usb.hid.build.usbtype=USB_HID
+teensypp2.menu.usb.hid.fake_serial=teensy_gateway
+teensypp2.menu.usb.serialhid=Serial + Keyboard + Mouse + Joystick
+teensypp2.menu.usb.serialhid.build.usbtype=USB_SERIAL_HID
+teensypp2.menu.usb.int_disk=Disk(Internal) + Keyboard
+teensypp2.menu.usb.int_disk.build.usbtype=USB_DISK
+teensypp2.menu.usb.int_disk.fake_serial=teensy_gateway
+teensypp2.menu.usb.int_disk.build.elfpatch=mktinyfat
+teensypp2.menu.usb.sd_disk=Disk(SD Card) + Keyboard
+teensypp2.menu.usb.sd_disk.build.usbtype=USB_DISK_SDFLASH
+teensypp2.menu.usb.sd_disk.fake_serial=teensy_gateway
+teensypp2.menu.usb.midi=MIDI
+teensypp2.menu.usb.midi.build.usbtype=USB_MIDI
+teensypp2.menu.usb.midi.fake_serial=teensy_gateway
+teensypp2.menu.usb.rawhid=Raw HID
+teensypp2.menu.usb.rawhid.build.usbtype=USB_RAWHID
+teensypp2.menu.usb.rawhid.fake_serial=teensy_gateway
+teensypp2.menu.usb.flightsim=Flight Sim Controls
+teensypp2.menu.usb.flightsim.build.usbtype=USB_FLIGHTSIM
+teensypp2.menu.usb.flightsim.fake_serial=teensy_gateway
+teensypp2.menu.speed.16=16 MHz
+teensypp2.menu.speed.8=8 MHz
+teensypp2.menu.speed.4=4 MHz
+teensypp2.menu.speed.2=2 MHz
+teensypp2.menu.speed.1=1 MHz
+teensypp2.menu.speed.16.build.fcpu=16000000L
+teensypp2.menu.speed.8.build.fcpu=8000000L
+teensypp2.menu.speed.4.build.fcpu=4000000L
+teensypp2.menu.speed.2.build.fcpu=2000000L
+teensypp2.menu.speed.1.build.fcpu=1000000L
+
+teensypp2.menu.keys.en-us=US English
+teensypp2.menu.keys.en-us.build.keylayout=US_ENGLISH
+teensypp2.menu.keys.fr-ca=Canadian French
+teensypp2.menu.keys.fr-ca.build.keylayout=CANADIAN_FRENCH
+teensypp2.menu.keys.xx-ca=Canadian Multilingual
+teensypp2.menu.keys.xx-ca.build.keylayout=CANADIAN_MULTILINGUAL
+teensypp2.menu.keys.cz-cz=Czech
+teensypp2.menu.keys.cz-cz.build.keylayout=CZECH
+teensypp2.menu.keys.da-da=Danish
+teensypp2.menu.keys.da-da.build.keylayout=DANISH
+teensypp2.menu.keys.fi-fi=Finnish
+teensypp2.menu.keys.fi-fi.build.keylayout=FINNISH
+teensypp2.menu.keys.fr-fr=French
+teensypp2.menu.keys.fr-fr.build.keylayout=FRENCH
+teensypp2.menu.keys.fr-be=French Belgian
+teensypp2.menu.keys.fr-be.build.keylayout=FRENCH_BELGIAN
+teensypp2.menu.keys.fr-ch=French Swiss
+teensypp2.menu.keys.fr-ch.build.keylayout=FRENCH_SWISS
+teensypp2.menu.keys.de-de=German
+teensypp2.menu.keys.de-de.build.keylayout=GERMAN
+teensypp2.menu.keys.de-dm=German (Mac)
+teensypp2.menu.keys.de-dm.build.keylayout=GERMAN_MAC
+teensypp2.menu.keys.de-ch=German Swiss
+teensypp2.menu.keys.de-ch.build.keylayout=GERMAN_SWISS
+teensypp2.menu.keys.is-is=Icelandic
+teensypp2.menu.keys.is-is.build.keylayout=ICELANDIC
+teensypp2.menu.keys.en-ie=Irish
+teensypp2.menu.keys.en-ie.build.keylayout=IRISH
+teensypp2.menu.keys.it-it=Italian
+teensypp2.menu.keys.it-it.build.keylayout=ITALIAN
+teensypp2.menu.keys.no-no=Norwegian
+teensypp2.menu.keys.no-no.build.keylayout=NORWEGIAN
+teensypp2.menu.keys.pt-pt=Portuguese
+teensypp2.menu.keys.pt-pt.build.keylayout=PORTUGUESE
+teensypp2.menu.keys.pt-br=Portuguese Brazilian
+teensypp2.menu.keys.pt-br.build.keylayout=PORTUGUESE_BRAZILIAN
+teensypp2.menu.keys.rs-rs=Serbian (Latin Only)
+teensypp2.menu.keys.rs-rs.build.keylayout=SERBIAN_LATIN_ONLY
+teensypp2.menu.keys.es-es=Spanish
+teensypp2.menu.keys.es-es.build.keylayout=SPANISH
+teensypp2.menu.keys.es-mx=Spanish Latin America
+teensypp2.menu.keys.es-mx.build.keylayout=SPANISH_LATIN_AMERICA
+teensypp2.menu.keys.sv-se=Swedish
+teensypp2.menu.keys.sv-se.build.keylayout=SWEDISH
+teensypp2.menu.keys.tr-tr=Turkish (partial)
+teensypp2.menu.keys.tr-tr.build.keylayout=TURKISH
+teensypp2.menu.keys.en-gb=United Kingdom
+teensypp2.menu.keys.en-gb.build.keylayout=UNITED_KINGDOM
+teensypp2.menu.keys.usint=US International
+teensypp2.menu.keys.usint.build.keylayout=US_INTERNATIONAL
+
+
 teensy2.name=Teensy 2.0
 teensy2.upload.maximum_size=32256
 teensy2.upload.maximum_data_size=2560
@@ -413,7 +565,7 @@ teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensy2.build.flags.dep=-MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=128 -DARDUINO_ARCH_AVR
+teensy2.build.flags.defs=-DTEENSYDUINO=129 -DARDUINO_ARCH_AVR
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp
@@ -509,117 +661,3 @@ teensy2.menu.keys.usint=US International
 teensy2.menu.keys.usint.build.keylayout=US_INTERNATIONAL
 
 
-teensypp2.name=Teensy++ 2.0
-teensypp2.upload.maximum_size=130048
-teensypp2.upload.maximum_data_size=8192
-teensypp2.upload.tool=teensyloader
-teensypp2.upload.protocol=halfkay
-teensypp2.build.board=TEENSY2PP
-teensypp2.build.core=teensy
-teensypp2.build.mcu=at90usb1286
-teensypp2.build.warn_data_percentage=94
-teensypp2.build.toolchain=avr/bin/
-teensypp2.build.command.gcc=avr-gcc
-teensypp2.build.command.g++=avr-g++
-teensypp2.build.command.ar=avr-ar
-teensypp2.build.command.objcopy=avr-objcopy
-teensypp2.build.command.objdump=avr-objdump
-teensypp2.build.command.size=avr-size
-teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
-teensypp2.build.flags.dep=-MMD
-teensypp2.build.flags.optimize=-Os
-teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=128 -DARDUINO_ARCH_AVR
-teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
-teensypp2.build.flags.c=
-teensypp2.build.flags.S=-x assembler-with-cpp
-teensypp2.build.flags.ld=-Wl,--gc-sections,--relax
-teensypp2.build.flags.ldspecs=
-teensypp2.build.flags.libs=-lm
-teensypp2.build.serial_number=true
-teensypp2.serial.restart_cmd=true
-
-teensypp2.menu.usb.serial=Serial
-teensypp2.menu.usb.serial.build.usbtype=USB_SERIAL
-teensypp2.menu.usb.hid=Keyboard + Mouse + Joystick
-teensypp2.menu.usb.hid.build.usbtype=USB_HID
-teensypp2.menu.usb.hid.fake_serial=teensy_gateway
-teensypp2.menu.usb.serialhid=Serial + Keyboard + Mouse + Joystick
-teensypp2.menu.usb.serialhid.build.usbtype=USB_SERIAL_HID
-teensypp2.menu.usb.int_disk=Disk(Internal) + Keyboard
-teensypp2.menu.usb.int_disk.build.usbtype=USB_DISK
-teensypp2.menu.usb.int_disk.fake_serial=teensy_gateway
-teensypp2.menu.usb.int_disk.build.elfpatch=mktinyfat
-teensypp2.menu.usb.sd_disk=Disk(SD Card) + Keyboard
-teensypp2.menu.usb.sd_disk.build.usbtype=USB_DISK_SDFLASH
-teensypp2.menu.usb.sd_disk.fake_serial=teensy_gateway
-teensypp2.menu.usb.midi=MIDI
-teensypp2.menu.usb.midi.build.usbtype=USB_MIDI
-teensypp2.menu.usb.midi.fake_serial=teensy_gateway
-teensypp2.menu.usb.rawhid=Raw HID
-teensypp2.menu.usb.rawhid.build.usbtype=USB_RAWHID
-teensypp2.menu.usb.rawhid.fake_serial=teensy_gateway
-teensypp2.menu.usb.flightsim=Flight Sim Controls
-teensypp2.menu.usb.flightsim.build.usbtype=USB_FLIGHTSIM
-teensypp2.menu.usb.flightsim.fake_serial=teensy_gateway
-teensypp2.menu.speed.16=16 MHz
-teensypp2.menu.speed.8=8 MHz
-teensypp2.menu.speed.4=4 MHz
-teensypp2.menu.speed.2=2 MHz
-teensypp2.menu.speed.1=1 MHz
-teensypp2.menu.speed.16.build.fcpu=16000000L
-teensypp2.menu.speed.8.build.fcpu=8000000L
-teensypp2.menu.speed.4.build.fcpu=4000000L
-teensypp2.menu.speed.2.build.fcpu=2000000L
-teensypp2.menu.speed.1.build.fcpu=1000000L
-
-teensypp2.menu.keys.en-us=US English
-teensypp2.menu.keys.en-us.build.keylayout=US_ENGLISH
-teensypp2.menu.keys.fr-ca=Canadian French
-teensypp2.menu.keys.fr-ca.build.keylayout=CANADIAN_FRENCH
-teensypp2.menu.keys.xx-ca=Canadian Multilingual
-teensypp2.menu.keys.xx-ca.build.keylayout=CANADIAN_MULTILINGUAL
-teensypp2.menu.keys.cz-cz=Czech
-teensypp2.menu.keys.cz-cz.build.keylayout=CZECH
-teensypp2.menu.keys.da-da=Danish
-teensypp2.menu.keys.da-da.build.keylayout=DANISH
-teensypp2.menu.keys.fi-fi=Finnish
-teensypp2.menu.keys.fi-fi.build.keylayout=FINNISH
-teensypp2.menu.keys.fr-fr=French
-teensypp2.menu.keys.fr-fr.build.keylayout=FRENCH
-teensypp2.menu.keys.fr-be=French Belgian
-teensypp2.menu.keys.fr-be.build.keylayout=FRENCH_BELGIAN
-teensypp2.menu.keys.fr-ch=French Swiss
-teensypp2.menu.keys.fr-ch.build.keylayout=FRENCH_SWISS
-teensypp2.menu.keys.de-de=German
-teensypp2.menu.keys.de-de.build.keylayout=GERMAN
-teensypp2.menu.keys.de-dm=German (Mac)
-teensypp2.menu.keys.de-dm.build.keylayout=GERMAN_MAC
-teensypp2.menu.keys.de-ch=German Swiss
-teensypp2.menu.keys.de-ch.build.keylayout=GERMAN_SWISS
-teensypp2.menu.keys.is-is=Icelandic
-teensypp2.menu.keys.is-is.build.keylayout=ICELANDIC
-teensypp2.menu.keys.en-ie=Irish
-teensypp2.menu.keys.en-ie.build.keylayout=IRISH
-teensypp2.menu.keys.it-it=Italian
-teensypp2.menu.keys.it-it.build.keylayout=ITALIAN
-teensypp2.menu.keys.no-no=Norwegian
-teensypp2.menu.keys.no-no.build.keylayout=NORWEGIAN
-teensypp2.menu.keys.pt-pt=Portuguese
-teensypp2.menu.keys.pt-pt.build.keylayout=PORTUGUESE
-teensypp2.menu.keys.pt-br=Portuguese Brazilian
-teensypp2.menu.keys.pt-br.build.keylayout=PORTUGUESE_BRAZILIAN
-teensypp2.menu.keys.rs-rs=Serbian (Latin Only)
-teensypp2.menu.keys.rs-rs.build.keylayout=SERBIAN_LATIN_ONLY
-teensypp2.menu.keys.es-es=Spanish
-teensypp2.menu.keys.es-es.build.keylayout=SPANISH
-teensypp2.menu.keys.es-mx=Spanish Latin America
-teensypp2.menu.keys.es-mx.build.keylayout=SPANISH_LATIN_AMERICA
-teensypp2.menu.keys.sv-se=Swedish
-teensypp2.menu.keys.sv-se.build.keylayout=SWEDISH
-teensypp2.menu.keys.tr-tr=Turkish (partial)
-teensypp2.menu.keys.tr-tr.build.keylayout=TURKISH
-teensypp2.menu.keys.en-gb=United Kingdom
-teensypp2.menu.keys.en-gb.build.keylayout=UNITED_KINGDOM
-teensypp2.menu.keys.usint=US International
-teensypp2.menu.keys.usint.build.keylayout=US_INTERNATIONAL
