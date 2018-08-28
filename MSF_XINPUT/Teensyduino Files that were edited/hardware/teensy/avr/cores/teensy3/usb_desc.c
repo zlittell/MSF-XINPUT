@@ -479,7 +479,7 @@ static uint8_t flightsim_report_desc[] = {
 
 #define AUDIO_INTERFACE_DESC_POS	KEYMEDIA_INTERFACE_DESC_POS+KEYMEDIA_INTERFACE_DESC_SIZE
 #ifdef  AUDIO_INTERFACE
-#define AUDIO_INTERFACE_DESC_SIZE	9+10+12+9+12+10+9 + 9+9+7+11+9+7 + 9+9+7+11+9+7+9
+#define AUDIO_INTERFACE_DESC_SIZE	8 + 9+10+12+9+12+10+9 + 9+9+7+11+9+7 + 9+9+7+11+9+7+9
 #else
 #define AUDIO_INTERFACE_DESC_SIZE	0
 #endif
@@ -945,6 +945,15 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
 #endif // KEYMEDIA_INTERFACE
 
 #ifdef AUDIO_INTERFACE
+        // interface association descriptor, USB ECN, Table 9-Z
+        8,                                      // bLength
+        11,                                     // bDescriptorType
+        AUDIO_INTERFACE,                        // bFirstInterface
+        3,                                      // bInterfaceCount
+        0x01,                                   // bFunctionClass
+        0x01,                                   // bFunctionSubClass
+        0x00,                                   // bFunctionProtocol
+        0,                                      // iFunction
 	// Standard AudioControl (AC) Interface Descriptor
 	// USB DCD for Audio Devices 1.0, Table 4-1, page 36
 	9,					// bLength
@@ -1363,12 +1372,13 @@ void usb_init_serialnumber(void)
 	while (!(FTFL_FSTAT & FTFL_FSTAT_CCIF)) ; // wait
 	num = *(uint32_t *)&FTFL_FCCOB7;
 #elif defined(HAS_KINETIS_FLASH_FTFE)
-	// TODO: does not work in HSRUN mode
+	kinetis_hsrun_disable();
 	FTFL_FSTAT = FTFL_FSTAT_RDCOLERR | FTFL_FSTAT_ACCERR | FTFL_FSTAT_FPVIOL;
 	*(uint32_t *)&FTFL_FCCOB3 = 0x41070000;
 	FTFL_FSTAT = FTFL_FSTAT_CCIF;
 	while (!(FTFL_FSTAT & FTFL_FSTAT_CCIF)) ; // wait
 	num = *(uint32_t *)&FTFL_FCCOBB;
+	kinetis_hsrun_enable();
 #endif
 	__enable_irq();
 	// add extra zero to work around OS-X CDC-ACM driver bug
