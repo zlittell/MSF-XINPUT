@@ -1147,7 +1147,7 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
 	9, 					// bLength
 	5, 					// bDescriptorType, 5 = ENDPOINT_DESCRIPTOR
 	AUDIO_SYNC_ENDPOINT | 0x80,		// bEndpointAddress
-	0x01, 					// bmAttributes = isochronous
+	0x11, 					// bmAttributes = isochronous, feedback
 	3, 0,					// wMaxPacketSize, 3 bytes
 	1,			 		// bInterval, 1 = every frame
 	5,					// bRefresh, 5 = 32ms
@@ -1355,12 +1355,21 @@ void usb_init_serialnumber(void)
 	uint32_t i, num;
 
 	__disable_irq();
+#if defined(HAS_KINETIS_FLASH_FTFA) || defined(HAS_KINETIS_FLASH_FTFL)
 	FTFL_FSTAT = FTFL_FSTAT_RDCOLERR | FTFL_FSTAT_ACCERR | FTFL_FSTAT_FPVIOL;
 	FTFL_FCCOB0 = 0x41;
 	FTFL_FCCOB1 = 15;
 	FTFL_FSTAT = FTFL_FSTAT_CCIF;
 	while (!(FTFL_FSTAT & FTFL_FSTAT_CCIF)) ; // wait
 	num = *(uint32_t *)&FTFL_FCCOB7;
+#elif defined(HAS_KINETIS_FLASH_FTFE)
+	// TODO: does not work in HSRUN mode
+	FTFL_FSTAT = FTFL_FSTAT_RDCOLERR | FTFL_FSTAT_ACCERR | FTFL_FSTAT_FPVIOL;
+	*(uint32_t *)&FTFL_FCCOB3 = 0x41070000;
+	FTFL_FSTAT = FTFL_FSTAT_CCIF;
+	while (!(FTFL_FSTAT & FTFL_FSTAT_CCIF)) ; // wait
+	num = *(uint32_t *)&FTFL_FCCOBB;
+#endif
 	__enable_irq();
 	// add extra zero to work around OS-X CDC-ACM driver bug
 	if (num < 10000000) num = num * 10;
