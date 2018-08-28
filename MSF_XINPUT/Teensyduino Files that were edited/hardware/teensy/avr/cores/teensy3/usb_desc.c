@@ -87,7 +87,7 @@ static uint8_t device_descriptor[] = {
         EP0_SIZE,                               // bMaxPacketSize0
         LSB(VENDOR_ID), MSB(VENDOR_ID),         // idVendor
         LSB(PRODUCT_ID), MSB(PRODUCT_ID),       // idProduct
-#ifdef DEVICE_VERSION                           // bcdDevice
+#ifdef DEVICE_VERSION                           // bcdDevice(XInput)
         LSB(DEVICE_VERSION), MSB(DEVICE_VERSION),
 #else
         0x00, 0x01,                             // bcdDevice
@@ -383,6 +383,7 @@ static uint8_t flightsim_report_desc[] = {
 #define JOYSTICK_INTERFACE_DESC_SIZE	0
 #endif
 
+// XInput defines its own descriptor size
 #ifndef CONFIG_DESC_SIZE
 #define CONFIG_DESC_SIZE		JOYSTICK_INTERFACE_DESC_POS+JOYSTICK_INTERFACE_DESC_SIZE
 #endif
@@ -405,14 +406,14 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
         1,                                      // bConfigurationValue
         0,                                      // iConfiguration
 #ifdef DEVICE_ATTRIBUTES
-        DEVICE_ATTRIBUTES,                      // bmAttributes
+        DEVICE_ATTRIBUTES,                      // bmAttributes (XInput)
 #else
-        0xC0,
+        0xC0,                                   // bmAttributes
 #endif
 #ifdef DEVICE_POWER
-        DEVICE_POWER,                           // bMaxPower
+        DEVICE_POWER,                           // bMaxPower (XInput)
 #else
-        50,
+        50,                                     // bMaxPower
 #endif
 
 #ifdef CDC_IAD_DESCRIPTOR
