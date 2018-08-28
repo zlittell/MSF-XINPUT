@@ -1,7 +1,7 @@
 menu.usb=USB Type
 menu.speed=CPU Speed
+menu.opt=Optimize
 menu.keys=Keyboard Layout
-
 
 teensy36.name=Teensy 3.6
 teensy36.upload.maximum_size=1048576
@@ -15,7 +15,7 @@ teensy36.build.warn_data_percentage=99
 teensy36.build.toolchain=arm/bin/
 teensy36.build.command.gcc=arm-none-eabi-gcc
 teensy36.build.command.g++=arm-none-eabi-g++
-teensy36.build.command.ar=arm-none-eabi-ar
+teensy36.build.command.ar=arm-none-eabi-gcc-ar
 teensy36.build.command.objcopy=arm-none-eabi-objcopy
 teensy36.build.command.objdump=arm-none-eabi-objdump
 teensy36.build.command.size=arm-none-eabi-size
@@ -23,7 +23,7 @@ teensy36.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy36.build.flags.dep=-MMD
 teensy36.build.flags.optimize=-Os
 teensy36.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=133
+teensy36.build.flags.defs=-D__MK66FX1M0__ -DTEENSYDUINO=134
 teensy36.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy36.build.flags.c=
 teensy36.build.flags.S=-x assembler-with-cpp
@@ -71,69 +71,70 @@ teensy36.menu.usb.everything.build.usbtype=USB_EVERYTHING
 teensy36.menu.usb.disable=No USB
 teensy36.menu.usb.disable.build.usbtype=USB_DISABLED
 
-teensy36.menu.speed.180opt=180 MHz
-teensy36.menu.speed.168opt=168 MHz
-teensy36.menu.speed.144opt=144 MHz
-teensy36.menu.speed.120opt=120 MHz
-teensy36.menu.speed.96opt=96 MHz
-teensy36.menu.speed.72opt=72 MHz
-teensy36.menu.speed.48opt=48 MHz
-teensy36.menu.speed.24opt=24 MHz
-teensy36.menu.speed.16opt=16 MHz (No USB)
-teensy36.menu.speed.8opt=8 MHz (No USB)
-teensy36.menu.speed.4opt=4 MHz (No USB)
-teensy36.menu.speed.2opt=2 MHz (No USB)
-teensy36.menu.speed.192opt=192 MHz (overclock)
-teensy36.menu.speed.216opt=216 MHz (overclock)
-teensy36.menu.speed.240opt=240 MHz (overclock)
-teensy36.menu.speed.240opt.build.fcpu=240000000
-teensy36.menu.speed.240opt.build.flags.optimize=-O
-teensy36.menu.speed.240opt.build.flags.ldspecs=
-teensy36.menu.speed.216opt.build.fcpu=216000000
-teensy36.menu.speed.216opt.build.flags.optimize=-O
-teensy36.menu.speed.216opt.build.flags.ldspecs=
-teensy36.menu.speed.192opt.build.fcpu=192000000
-teensy36.menu.speed.192opt.build.flags.optimize=-O
-teensy36.menu.speed.192opt.build.flags.ldspecs=
-teensy36.menu.speed.180opt.build.fcpu=180000000
-teensy36.menu.speed.180opt.build.flags.optimize=-O
-teensy36.menu.speed.180opt.build.flags.ldspecs=
-teensy36.menu.speed.168opt.build.fcpu=168000000
-teensy36.menu.speed.168opt.build.flags.optimize=-O
-teensy36.menu.speed.168opt.build.flags.ldspecs=
-teensy36.menu.speed.144opt.build.fcpu=144000000
-teensy36.menu.speed.144opt.build.flags.optimize=-O
-teensy36.menu.speed.144opt.build.flags.ldspecs=
-teensy36.menu.speed.120opt.build.fcpu=120000000
-teensy36.menu.speed.120opt.build.flags.optimize=-O
-teensy36.menu.speed.120opt.build.flags.ldspecs=
-teensy36.menu.speed.96opt.build.fcpu=96000000
-teensy36.menu.speed.96opt.build.flags.optimize=-O
-teensy36.menu.speed.96opt.build.flags.ldspecs=
-teensy36.menu.speed.72opt.build.fcpu=72000000
-teensy36.menu.speed.72opt.build.flags.optimize=-O
-teensy36.menu.speed.72opt.build.flags.ldspecs=
-teensy36.menu.speed.48opt.build.fcpu=48000000
-teensy36.menu.speed.48opt.build.flags.optimize=-O
-teensy36.menu.speed.48opt.build.flags.ldspecs=
-teensy36.menu.speed.24opt.build.fcpu=24000000
-teensy36.menu.speed.24opt.build.flags.optimize=-O
-teensy36.menu.speed.24opt.build.flags.ldspecs=
-teensy36.menu.speed.16opt.build.fcpu=16000000
-teensy36.menu.speed.16opt.build.flags.optimize=-O
-teensy36.menu.speed.16opt.build.flags.ldspecs=
-teensy36.menu.speed.8opt.build.fcpu=8000000
-teensy36.menu.speed.8opt.build.flags.optimize=-O
-teensy36.menu.speed.8opt.build.flags.ldspecs=
-teensy36.menu.speed.4opt.build.fcpu=4000000
-teensy36.menu.speed.4opt.build.flags.optimize=-O
-teensy36.menu.speed.4opt.build.flags.ldspecs=
-teensy36.menu.speed.2opt.build.fcpu=2000000
-teensy36.menu.speed.2opt.build.flags.optimize=-O
-teensy36.menu.speed.2opt.build.flags.ldspecs=
+teensy36.menu.speed.180=180 MHz
+teensy36.menu.speed.168=168 MHz
+teensy36.menu.speed.144=144 MHz
+teensy36.menu.speed.120=120 MHz
+teensy36.menu.speed.96=96 MHz
+teensy36.menu.speed.72=72 MHz
+teensy36.menu.speed.48=48 MHz
+teensy36.menu.speed.24=24 MHz
+teensy36.menu.speed.16=16 MHz (No USB)
+teensy36.menu.speed.8=8 MHz (No USB)
+teensy36.menu.speed.4=4 MHz (No USB)
+teensy36.menu.speed.2=2 MHz (No USB)
+teensy36.menu.speed.192=192 MHz (overclock)
+teensy36.menu.speed.216=216 MHz (overclock)
+teensy36.menu.speed.240=240 MHz (overclock)
+teensy36.menu.speed.240.build.fcpu=240000000
+teensy36.menu.speed.216.build.fcpu=216000000
+teensy36.menu.speed.192.build.fcpu=192000000
+teensy36.menu.speed.180.build.fcpu=180000000
+teensy36.menu.speed.168.build.fcpu=168000000
+teensy36.menu.speed.144.build.fcpu=144000000
+teensy36.menu.speed.120.build.fcpu=120000000
 teensy36.menu.speed.96.build.fcpu=96000000
-teensy36.menu.speed.96.build.flags.optimize=-Os
-teensy36.menu.speed.96.build.flags.ldspecs=--specs=nano.specs
+teensy36.menu.speed.72.build.fcpu=72000000
+teensy36.menu.speed.48.build.fcpu=48000000
+teensy36.menu.speed.24.build.fcpu=24000000
+teensy36.menu.speed.16.build.fcpu=16000000
+teensy36.menu.speed.8.build.fcpu=8000000
+teensy36.menu.speed.4.build.fcpu=4000000
+teensy36.menu.speed.2.build.fcpu=2000000
+
+#teensy36.menu.opt.o3lto=Fastest with LTO
+#teensy36.menu.opt.o3lto.build.flags.optimize=-O3 -flto -fno-fat-lto-objects
+#teensy36.menu.opt.o3lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy36.menu.opt.o3std=Fastest
+#teensy36.menu.opt.o3std.build.flags.optimize=-O3
+#teensy36.menu.opt.o3std.build.flags.ldspecs=
+#teensy36.menu.opt.o2lto=Faster with LTO
+#teensy36.menu.opt.o2lto.build.flags.optimize=-O2 -flto -fno-fat-lto-objects
+#teensy36.menu.opt.o2lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy36.menu.opt.o2std=Faster
+#teensy36.menu.opt.o2std.build.flags.optimize=-O2
+#teensy36.menu.opt.o2std.build.flags.ldspecs=
+#teensy36.menu.opt.o1lto=Fast with LTO
+#teensy36.menu.opt.o1lto.build.flags.optimize=-O1 -flto -fno-fat-lto-objects
+#teensy36.menu.opt.o1lto.build.flags.ldspecs=-fuse-linker-plugin
+teensy36.menu.opt.o1std=Fast
+teensy36.menu.opt.o1std.build.flags.optimize=-O1
+teensy36.menu.opt.o1std.build.flags.ldspecs=
+teensy36.menu.opt.o2std=Faster
+teensy36.menu.opt.o2std.build.flags.optimize=-O2
+teensy36.menu.opt.o2std.build.flags.ldspecs=
+#teensy36.menu.opt.oglto=Debug with LTO
+#teensy36.menu.opt.oglto.build.flags.optimize=-Og -flto -fno-fat-lto-objects
+#teensy36.menu.opt.oglto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy36.menu.opt.ogstd=Debug
+#teensy36.menu.opt.ogstd.build.flags.optimize=-Og
+#teensy36.menu.opt.ogstd.build.flags.ldspecs=
+#teensy36.menu.opt.oslto=Smallest Code with LTO
+#teensy36.menu.opt.oslto.build.flags.optimize=-Os -flto -fno-fat-lto-objects --specs=nano.specs
+#teensy36.menu.opt.oslto.build.flags.ldspecs=-fuse-linker-plugin
+teensy36.menu.opt.osstd=Smallest Code
+teensy36.menu.opt.osstd.build.flags.optimize=-Os --specs=nano.specs
+teensy36.menu.opt.osstd.build.flags.ldspecs=
 
 teensy36.menu.keys.en-us=US English
 teensy36.menu.keys.en-us.build.keylayout=US_ENGLISH
@@ -199,7 +200,7 @@ teensy35.build.warn_data_percentage=98
 teensy35.build.toolchain=arm/bin/
 teensy35.build.command.gcc=arm-none-eabi-gcc
 teensy35.build.command.g++=arm-none-eabi-g++
-teensy35.build.command.ar=arm-none-eabi-ar
+teensy35.build.command.ar=arm-none-eabi-gcc-ar
 teensy35.build.command.objcopy=arm-none-eabi-objcopy
 teensy35.build.command.objdump=arm-none-eabi-objdump
 teensy35.build.command.size=arm-none-eabi-size
@@ -207,7 +208,7 @@ teensy35.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy35.build.flags.dep=-MMD
 teensy35.build.flags.optimize=-Os
 teensy35.build.flags.cpu=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
-teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=133
+teensy35.build.flags.defs=-D__MK64FX512__ -DTEENSYDUINO=134
 teensy35.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy35.build.flags.c=
 teensy35.build.flags.S=-x assembler-with-cpp
@@ -255,57 +256,58 @@ teensy35.menu.usb.everything.build.usbtype=USB_EVERYTHING
 teensy35.menu.usb.disable=No USB
 teensy35.menu.usb.disable.build.usbtype=USB_DISABLED
 
-teensy35.menu.speed.120opt=120 MHz
-teensy35.menu.speed.96opt=96 MHz
-teensy35.menu.speed.72opt=72 MHz
-teensy35.menu.speed.48opt=48 MHz
-teensy35.menu.speed.24opt=24 MHz
-teensy35.menu.speed.16opt=16 MHz (No USB)
-teensy35.menu.speed.8opt=8 MHz (No USB)
-teensy35.menu.speed.4opt=4 MHz (No USB)
-teensy35.menu.speed.2opt=2 MHz (No USB)
-teensy35.menu.speed.192opt.build.fcpu=192000000
-teensy35.menu.speed.192opt.build.flags.optimize=-O
-teensy35.menu.speed.192opt.build.flags.ldspecs=
-teensy35.menu.speed.180opt.build.fcpu=180000000
-teensy35.menu.speed.180opt.build.flags.optimize=-O
-teensy35.menu.speed.180opt.build.flags.ldspecs=
-teensy35.menu.speed.168opt.build.fcpu=168000000
-teensy35.menu.speed.168opt.build.flags.optimize=-O
-teensy35.menu.speed.168opt.build.flags.ldspecs=
-teensy35.menu.speed.144opt.build.fcpu=144000000
-teensy35.menu.speed.144opt.build.flags.optimize=-O
-teensy35.menu.speed.144opt.build.flags.ldspecs=
-teensy35.menu.speed.120opt.build.fcpu=120000000
-teensy35.menu.speed.120opt.build.flags.optimize=-O
-teensy35.menu.speed.120opt.build.flags.ldspecs=
-teensy35.menu.speed.96opt.build.fcpu=96000000
-teensy35.menu.speed.96opt.build.flags.optimize=-O
-teensy35.menu.speed.96opt.build.flags.ldspecs=
-teensy35.menu.speed.72opt.build.fcpu=72000000
-teensy35.menu.speed.72opt.build.flags.optimize=-O
-teensy35.menu.speed.72opt.build.flags.ldspecs=
-teensy35.menu.speed.48opt.build.fcpu=48000000
-teensy35.menu.speed.48opt.build.flags.optimize=-O
-teensy35.menu.speed.48opt.build.flags.ldspecs=
-teensy35.menu.speed.24opt.build.fcpu=24000000
-teensy35.menu.speed.24opt.build.flags.optimize=-O
-teensy35.menu.speed.24opt.build.flags.ldspecs=
-teensy35.menu.speed.16opt.build.fcpu=16000000
-teensy35.menu.speed.16opt.build.flags.optimize=-O
-teensy35.menu.speed.16opt.build.flags.ldspecs=
-teensy35.menu.speed.8opt.build.fcpu=8000000
-teensy35.menu.speed.8opt.build.flags.optimize=-O
-teensy35.menu.speed.8opt.build.flags.ldspecs=
-teensy35.menu.speed.4opt.build.fcpu=4000000
-teensy35.menu.speed.4opt.build.flags.optimize=-O
-teensy35.menu.speed.4opt.build.flags.ldspecs=
-teensy35.menu.speed.2opt.build.fcpu=2000000
-teensy35.menu.speed.2opt.build.flags.optimize=-O
-teensy35.menu.speed.2opt.build.flags.ldspecs=
+teensy35.menu.speed.120=120 MHz
+teensy35.menu.speed.96=96 MHz
+teensy35.menu.speed.72=72 MHz
+teensy35.menu.speed.48=48 MHz
+teensy35.menu.speed.24=24 MHz
+teensy35.menu.speed.16=16 MHz (No USB)
+teensy35.menu.speed.8=8 MHz (No USB)
+teensy35.menu.speed.4=4 MHz (No USB)
+teensy35.menu.speed.2=2 MHz (No USB)
+teensy35.menu.speed.120.build.fcpu=120000000
 teensy35.menu.speed.96.build.fcpu=96000000
-teensy35.menu.speed.96.build.flags.optimize=-Os
-teensy35.menu.speed.96.build.flags.ldspecs=--specs=nano.specs
+teensy35.menu.speed.72.build.fcpu=72000000
+teensy35.menu.speed.48.build.fcpu=48000000
+teensy35.menu.speed.24.build.fcpu=24000000
+teensy35.menu.speed.16.build.fcpu=16000000
+teensy35.menu.speed.8.build.fcpu=8000000
+teensy35.menu.speed.4.build.fcpu=4000000
+teensy35.menu.speed.2.build.fcpu=2000000
+
+#teensy35.menu.opt.o3lto=Fastest with LTO
+#teensy35.menu.opt.o3lto.build.flags.optimize=-O3 -flto -fno-fat-lto-objects
+#teensy35.menu.opt.o3lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy35.menu.opt.o3std=Fastest
+#teensy35.menu.opt.o3std.build.flags.optimize=-O3
+#teensy35.menu.opt.o3std.build.flags.ldspecs=
+#teensy35.menu.opt.o2lto=Faster with LTO
+#teensy35.menu.opt.o2lto.build.flags.optimize=-O2 -flto -fno-fat-lto-objects
+#teensy35.menu.opt.o2lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy35.menu.opt.o2std=Faster
+#teensy35.menu.opt.o2std.build.flags.optimize=-O2
+#teensy35.menu.opt.o2std.build.flags.ldspecs=
+#teensy35.menu.opt.o1lto=Fast with LTO
+#teensy35.menu.opt.o1lto.build.flags.optimize=-O1 -flto -fno-fat-lto-objects
+#teensy35.menu.opt.o1lto.build.flags.ldspecs=-fuse-linker-plugin
+teensy35.menu.opt.o1std=Fast
+teensy35.menu.opt.o1std.build.flags.optimize=-O1
+teensy35.menu.opt.o1std.build.flags.ldspecs=
+teensy35.menu.opt.o2std=Faster
+teensy35.menu.opt.o2std.build.flags.optimize=-O2
+teensy35.menu.opt.o2std.build.flags.ldspecs=
+#teensy35.menu.opt.oglto=Debug with LTO
+#teensy35.menu.opt.oglto.build.flags.optimize=-Og -flto -fno-fat-lto-objects
+#teensy35.menu.opt.oglto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy35.menu.opt.ogstd=Debug
+#teensy35.menu.opt.ogstd.build.flags.optimize=-Og
+#teensy35.menu.opt.ogstd.build.flags.ldspecs=
+#teensy35.menu.opt.oslto=Smallest Code with LTO
+#teensy35.menu.opt.oslto.build.flags.optimize=-Os -flto -fno-fat-lto-objects --specs=nano.specs
+#teensy35.menu.opt.oslto.build.flags.ldspecs=-fuse-linker-plugin
+teensy35.menu.opt.osstd=Smallest Code
+teensy35.menu.opt.osstd.build.flags.optimize=-Os --specs=nano.specs
+teensy35.menu.opt.osstd.build.flags.ldspecs=
 
 teensy35.menu.keys.en-us=US English
 teensy35.menu.keys.en-us.build.keylayout=US_ENGLISH
@@ -371,7 +373,7 @@ teensy31.build.warn_data_percentage=97
 teensy31.build.toolchain=arm/bin/
 teensy31.build.command.gcc=arm-none-eabi-gcc
 teensy31.build.command.g++=arm-none-eabi-g++
-teensy31.build.command.ar=arm-none-eabi-ar
+teensy31.build.command.ar=arm-none-eabi-gcc-ar
 teensy31.build.command.objcopy=arm-none-eabi-objcopy
 teensy31.build.command.objdump=arm-none-eabi-objdump
 teensy31.build.command.size=arm-none-eabi-size
@@ -379,7 +381,7 @@ teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy31.build.flags.dep=-MMD
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=133
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=134
 teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy31.build.flags.c=
 teensy31.build.flags.S=-x assembler-with-cpp
@@ -428,67 +430,64 @@ teensy31.menu.usb.everything=All of the Above
 teensy31.menu.usb.everything.build.usbtype=USB_EVERYTHING
 teensy31.menu.usb.disable=No USB
 teensy31.menu.usb.disable.build.usbtype=USB_DISABLED
+
+teensy31.menu.speed.96=96 MHz (overclock)
+teensy31.menu.speed.72=72 MHz
+teensy31.menu.speed.48=48 MHz
+teensy31.menu.speed.24=24 MHz
+teensy31.menu.speed.16=16 MHz (No USB)
+teensy31.menu.speed.8=8 MHz (No USB)
+teensy31.menu.speed.4=4 MHz (No USB)
+teensy31.menu.speed.2=2 MHz (No USB)
+teensy31.menu.speed.120=120 MHz (overclock)
 #uncomment these if you want to try faster overclocking
-#teensy31.menu.speed.168opt=168 MHz optimize speed (overclock)
-#teensy31.menu.speed.144opt=144 MHz optimize speed (overclock)
-teensy31.menu.speed.96opt=96 MHz optimize speed (overclock)
-teensy31.menu.speed.72opt=72 MHz optimize speed
-teensy31.menu.speed.48opt=48 MHz optimize speed
-teensy31.menu.speed.24opt=24 MHz optimize speed
-teensy31.menu.speed.96=96 MHz reduce code size (overclock)
-teensy31.menu.speed.72=72 MHz reduce code size
-teensy31.menu.speed.48=48 MHz reduce code size
-teensy31.menu.speed.24=24 MHz reduce code size
-teensy31.menu.speed.16=16 MHz reduce code size (No USB)
-teensy31.menu.speed.8=8 MHz reduce code size (No USB)
-teensy31.menu.speed.4=4 MHz reduce code size (No USB)
-teensy31.menu.speed.2=2 MHz reduce code size (No USB)
-teensy31.menu.speed.120opt=120 MHz optimize speed (overclock)
-teensy31.menu.speed.168opt.build.fcpu=168000000
-teensy31.menu.speed.168opt.build.flags.optimize=-O
-teensy31.menu.speed.168opt.build.flags.ldspecs=
-teensy31.menu.speed.144opt.build.fcpu=144000000
-teensy31.menu.speed.144opt.build.flags.optimize=-O
-teensy31.menu.speed.144opt.build.flags.ldspecs=
-teensy31.menu.speed.120opt.build.fcpu=120000000
-teensy31.menu.speed.120opt.build.flags.optimize=-O
-teensy31.menu.speed.120opt.build.flags.ldspecs=
-teensy31.menu.speed.96opt.build.fcpu=96000000
-teensy31.menu.speed.96opt.build.flags.optimize=-O
-teensy31.menu.speed.96opt.build.flags.ldspecs=
-teensy31.menu.speed.72opt.build.fcpu=72000000
-teensy31.menu.speed.72opt.build.flags.optimize=-O
-teensy31.menu.speed.72opt.build.flags.ldspecs=
-teensy31.menu.speed.48opt.build.fcpu=48000000
-teensy31.menu.speed.48opt.build.flags.optimize=-O
-teensy31.menu.speed.48opt.build.flags.ldspecs=
-teensy31.menu.speed.24opt.build.fcpu=24000000
-teensy31.menu.speed.24opt.build.flags.optimize=-O
-teensy31.menu.speed.24opt.build.flags.ldspecs=
+#teensy31.menu.speed.144=144 MHz (overclock)
+#teensy31.menu.speed.168=168 MHz (overclock)
+teensy31.menu.speed.168.build.fcpu=168000000
+teensy31.menu.speed.144.build.fcpu=144000000
+teensy31.menu.speed.120.build.fcpu=120000000
 teensy31.menu.speed.96.build.fcpu=96000000
-teensy31.menu.speed.96.build.flags.optimize=-Os
-teensy31.menu.speed.96.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.72.build.fcpu=72000000
-teensy31.menu.speed.72.build.flags.optimize=-Os
-teensy31.menu.speed.72.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.48.build.fcpu=48000000
-teensy31.menu.speed.48.build.flags.optimize=-Os
-teensy31.menu.speed.48.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.24.build.fcpu=24000000
-teensy31.menu.speed.24.build.flags.optimize=-Os
-teensy31.menu.speed.24.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.16.build.fcpu=16000000
-teensy31.menu.speed.16.build.flags.optimize=-Os
-teensy31.menu.speed.16.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.8.build.fcpu=8000000
-teensy31.menu.speed.8.build.flags.optimize=-Os
-teensy31.menu.speed.8.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.4.build.fcpu=4000000
-teensy31.menu.speed.4.build.flags.optimize=-Os
-teensy31.menu.speed.4.build.flags.ldspecs=--specs=nano.specs
 teensy31.menu.speed.2.build.fcpu=2000000
-teensy31.menu.speed.2.build.flags.optimize=-Os
-teensy31.menu.speed.2.build.flags.ldspecs=--specs=nano.specs
+
+#teensy31.menu.opt.o3lto=Fastest with LTO
+#teensy31.menu.opt.o3lto.build.flags.optimize=-O3 -flto -fno-fat-lto-objects
+#teensy31.menu.opt.o3lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy31.menu.opt.o3std=Fastest
+#teensy31.menu.opt.o3std.build.flags.optimize=-O3
+#teensy31.menu.opt.o3std.build.flags.ldspecs=
+#teensy31.menu.opt.o2lto=Faster with LTO
+#teensy31.menu.opt.o2lto.build.flags.optimize=-O2 -flto -fno-fat-lto-objects
+#teensy31.menu.opt.o2lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy31.menu.opt.o2std=Faster
+#teensy31.menu.opt.o2std.build.flags.optimize=-O2
+#teensy31.menu.opt.o2std.build.flags.ldspecs=
+#teensy31.menu.opt.o1lto=Fast with LTO
+#teensy31.menu.opt.o1lto.build.flags.optimize=-O1 -flto -fno-fat-lto-objects
+#teensy31.menu.opt.o1lto.build.flags.ldspecs=-fuse-linker-plugin
+teensy31.menu.opt.o1std=Fast
+teensy31.menu.opt.o1std.build.flags.optimize=-O1
+teensy31.menu.opt.o1std.build.flags.ldspecs=
+teensy31.menu.opt.o2std=Faster
+teensy31.menu.opt.o2std.build.flags.optimize=-O2
+teensy31.menu.opt.o2std.build.flags.ldspecs=
+#teensy31.menu.opt.oglto=Debug with LTO
+#teensy31.menu.opt.oglto.build.flags.optimize=-Og -flto -fno-fat-lto-objects
+#teensy31.menu.opt.oglto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy31.menu.opt.ogstd=Debug
+#teensy31.menu.opt.ogstd.build.flags.optimize=-Og
+#teensy31.menu.opt.ogstd.build.flags.ldspecs=
+#teensy31.menu.opt.oslto=Smallest Code with LTO
+#teensy31.menu.opt.oslto.build.flags.optimize=-Os -flto -fno-fat-lto-objects --specs=nano.specs
+#teensy31.menu.opt.oslto.build.flags.ldspecs=-fuse-linker-plugin
+teensy31.menu.opt.osstd=Smallest Code
+teensy31.menu.opt.osstd.build.flags.optimize=-Os --specs=nano.specs
+teensy31.menu.opt.osstd.build.flags.ldspecs=
 
 teensy31.menu.keys.en-us=US English
 teensy31.menu.keys.en-us.build.keylayout=US_ENGLISH
@@ -564,7 +563,7 @@ teensy30.build.warn_data_percentage=94
 teensy30.build.toolchain=arm/bin/
 teensy30.build.command.gcc=arm-none-eabi-gcc
 teensy30.build.command.g++=arm-none-eabi-g++
-teensy30.build.command.ar=arm-none-eabi-ar
+teensy30.build.command.ar=arm-none-eabi-gcc-ar
 teensy30.build.command.objcopy=arm-none-eabi-objcopy
 teensy30.build.command.objdump=arm-none-eabi-objdump
 teensy30.build.command.size=arm-none-eabi-size
@@ -572,7 +571,7 @@ teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdl
 teensy30.build.flags.dep=-MMD
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=133
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=134
 teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
@@ -612,12 +611,44 @@ teensy30.menu.usb.flightsim.build.usbtype=USB_FLIGHTSIM
 teensy30.menu.usb.flightsim.fake_serial=teensy_gateway
 teensy30.menu.usb.disable=No USB
 teensy30.menu.usb.disable.build.usbtype=USB_DISABLED
+
 teensy30.menu.speed.96=96 MHz (overclock)
 teensy30.menu.speed.48=48 MHz
 teensy30.menu.speed.24=24 MHz
 teensy30.menu.speed.96.build.fcpu=96000000
 teensy30.menu.speed.48.build.fcpu=48000000
 teensy30.menu.speed.24.build.fcpu=24000000
+
+#teensy30.menu.opt.o3lto=Fastest with LTO
+#teensy30.menu.opt.o3lto.build.flags.optimize=-O3 -flto -fno-fat-lto-objects
+#teensy30.menu.opt.o3lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy30.menu.opt.o3std=Fastest
+#teensy30.menu.opt.o3std.build.flags.optimize=-O3
+#teensy30.menu.opt.o3std.build.flags.ldspecs=
+#teensy30.menu.opt.o2lto=Faster with LTO
+#teensy30.menu.opt.o2lto.build.flags.optimize=-O2 -flto -fno-fat-lto-objects
+#teensy30.menu.opt.o2lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy30.menu.opt.o2std=Faster
+#teensy30.menu.opt.o2std.build.flags.optimize=-O2
+#teensy30.menu.opt.o2std.build.flags.ldspecs=
+#teensy30.menu.opt.o1lto=Fast with LTO
+#teensy30.menu.opt.o1lto.build.flags.optimize=-O1 -flto -fno-fat-lto-objects
+#teensy30.menu.opt.o1lto.build.flags.ldspecs=-fuse-linker-plugin
+teensy30.menu.opt.o1std=Fast
+teensy30.menu.opt.o1std.build.flags.optimize=-O1
+teensy30.menu.opt.o1std.build.flags.ldspecs=
+#teensy30.menu.opt.oglto=Debug with LTO
+#teensy30.menu.opt.oglto.build.flags.optimize=-Og -flto -fno-fat-lto-objects
+#teensy30.menu.opt.oglto.build.flags.ldspecs=-fuse-linker-plugin
+#teensy30.menu.opt.ogstd=Debug
+#teensy30.menu.opt.ogstd.build.flags.optimize=-Og
+#teensy30.menu.opt.ogstd.build.flags.ldspecs=
+#teensy30.menu.opt.oslto=Smallest Code with LTO
+#teensy30.menu.opt.oslto.build.flags.optimize=-Os -flto -fno-fat-lto-objects --specs=nano.specs
+#teensy30.menu.opt.oslto.build.flags.ldspecs=-fuse-linker-plugin
+teensy30.menu.opt.osstd=Smallest Code
+teensy30.menu.opt.osstd.build.flags.optimize=-Os --specs=nano.specs
+teensy30.menu.opt.osstd.build.flags.ldspecs=
 
 teensy30.menu.keys.en-us=US English
 teensy30.menu.keys.en-us.build.keylayout=US_ENGLISH
@@ -683,14 +714,14 @@ teensyLC.build.warn_data_percentage=88
 teensyLC.build.toolchain=arm/bin/
 teensyLC.build.command.gcc=arm-none-eabi-gcc
 teensyLC.build.command.g++=arm-none-eabi-g++
-teensyLC.build.command.ar=arm-none-eabi-ar
+teensyLC.build.command.ar=arm-none-eabi-gcc-ar
 teensyLC.build.command.objcopy=arm-none-eabi-objcopy
 teensyLC.build.command.objdump=arm-none-eabi-objdump
 teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -nostdlib
 teensyLC.build.flags.dep=-MMD
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus -fsingle-precision-constant
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=133
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=134
 teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensyLC.build.flags.c=
 teensyLC.build.flags.S=-x assembler-with-cpp
@@ -726,22 +757,42 @@ teensyLC.menu.usb.xinput.build.usbtype=USB_XINPUT
 teensyLC.menu.usb.xinput.fake_serial=teensy_gateway
 teensyLC.menu.usb.disable=No USB
 teensyLC.menu.usb.disable.build.usbtype=USB_DISABLED
+
 teensyLC.menu.speed.48=48 MHz
 teensyLC.menu.speed.24=24 MHz
-teensyLC.menu.speed.48opt=48 MHz optimized
-teensyLC.menu.speed.24opt=24 MHz optimized
 teensyLC.menu.speed.48.build.fcpu=48000000
-teensyLC.menu.speed.48.build.flags.optimize=-Os
-teensyLC.menu.speed.48.build.flags.ldspecs=--specs=nano.specs
 teensyLC.menu.speed.24.build.fcpu=24000000
-teensyLC.menu.speed.24.build.flags.optimize=-Os
-teensyLC.menu.speed.24.build.flags.ldspecs=--specs=nano.specs
-teensyLC.menu.speed.48opt.build.fcpu=48000000
-teensyLC.menu.speed.48opt.build.flags.optimize=-O
-teensyLC.menu.speed.48opt.build.flags.ldspecs=
-teensyLC.menu.speed.24opt.build.fcpu=24000000
-teensyLC.menu.speed.24opt.build.flags.optimize=-O
-teensyLC.menu.speed.24opt.build.flags.ldspecs=
+
+#teensyLC.menu.opt.oslto=Smallest Code with LTO
+#teensyLC.menu.opt.oslto.build.flags.optimize=-Os -flto -fno-fat-lto-objects --specs=nano.specs
+#teensyLC.menu.opt.oslto.build.flags.ldspecs=-fuse-linker-plugin
+teensyLC.menu.opt.osstd=Smallest Code
+teensyLC.menu.opt.osstd.build.flags.optimize=-Os --specs=nano.specs
+teensyLC.menu.opt.osstd.build.flags.ldspecs=
+#teensyLC.menu.opt.oglto=Debug with LTO
+#teensyLC.menu.opt.oglto.build.flags.optimize=-Og -flto -fno-fat-lto-objects
+#teensyLC.menu.opt.oglto.build.flags.ldspecs=-fuse-linker-plugin
+#teensyLC.menu.opt.ogstd=Debug
+#teensyLC.menu.opt.ogstd.build.flags.optimize=-Og
+#teensyLC.menu.opt.ogstd.build.flags.ldspecs=
+#teensyLC.menu.opt.o3lto=Fastest with LTO
+#teensyLC.menu.opt.o3lto.build.flags.optimize=-O3 -flto -fno-fat-lto-objects
+#teensyLC.menu.opt.o3lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensyLC.menu.opt.o3std=Fastest
+#teensyLC.menu.opt.o3std.build.flags.optimize=-O3
+#teensyLC.menu.opt.o3std.build.flags.ldspecs=
+#teensyLC.menu.opt.o2lto=Faster with LTO
+#teensyLC.menu.opt.o2lto.build.flags.optimize=-O2 -flto -fno-fat-lto-objects
+#teensyLC.menu.opt.o2lto.build.flags.ldspecs=-fuse-linker-plugin
+#teensyLC.menu.opt.o2std=Faster
+#teensyLC.menu.opt.o2std.build.flags.optimize=-O2
+#teensyLC.menu.opt.o2std.build.flags.ldspecs=
+#teensyLC.menu.opt.o1lto=Fast with LTO
+#teensyLC.menu.opt.o1lto.build.flags.optimize=-O1 -flto -fno-fat-lto-objects
+#teensyLC.menu.opt.o1lto.build.flags.ldspecs=-fuse-linker-plugin
+teensyLC.menu.opt.o1std=Fast
+teensyLC.menu.opt.o1std.build.flags.optimize=-O1
+teensyLC.menu.opt.o1std.build.flags.ldspecs=
 
 teensyLC.menu.keys.en-us=US English
 teensyLC.menu.keys.en-us.build.keylayout=US_ENGLISH
@@ -815,7 +866,7 @@ teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensypp2.build.flags.dep=-MMD
 teensypp2.build.flags.optimize=-Os
 teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=133 -DARDUINO_ARCH_AVR
+teensypp2.build.flags.defs=-DTEENSYDUINO=134 -DARDUINO_ARCH_AVR
 teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensypp2.build.flags.c=
 teensypp2.build.flags.S=-x assembler-with-cpp
@@ -931,7 +982,7 @@ teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections
 teensy2.build.flags.dep=-MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=133 -DARDUINO_ARCH_AVR
+teensy2.build.flags.defs=-DTEENSYDUINO=134 -DARDUINO_ARCH_AVR
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp
