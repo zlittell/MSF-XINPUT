@@ -22,9 +22,9 @@ teensy31.build.command.size=arm-none-eabi-size
 teensy31.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensy31.build.flags.optimize=-Os
 teensy31.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=125
+teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=126
 #for use with Visual Micro, uncomment these lines and remove the one above
-#teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=125 -DF_CPU=96000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+#teensy31.build.flags.defs=-D__MK20DX256__ -DTEENSYDUINO=126 -DF_CPU=96000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
 #teensy31.build.flags.ldspecs=
 #teensy31.build.flags.optimize=-O
 teensy31.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
@@ -193,7 +193,7 @@ teensy30.build.command.size=arm-none-eabi-size
 teensy30.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensy30.build.flags.optimize=-Os
 teensy30.build.flags.cpu=-mthumb -mcpu=cortex-m4 -fsingle-precision-constant
-teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=125
+teensy30.build.flags.defs=-D__MK20DX128__ -DTEENSYDUINO=126
 teensy30.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
 teensy30.build.flags.c=
 teensy30.build.flags.S=-x assembler-with-cpp
@@ -297,9 +297,9 @@ teensyLC.build.command.objdump=arm-none-eabi-objdump
 teensyLC.build.command.size=arm-none-eabi-size
 teensyLC.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD -nostdlib
 teensyLC.build.flags.cpu=-mthumb -mcpu=cortex-m0plus -fsingle-precision-constant
-teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=125
+teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=126
 #for use with Visual Micro, uncomment these lines and remove the one above
-#teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=125 -DF_CPU=48000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
+#teensyLC.build.flags.defs=-D__MKL26Z64__ -DTEENSYDUINO=126 -DF_CPU=48000000 -DUSB_SERIAL -DLAYOUT_US_ENGLISH
 #teensyLC.build.flags.ldspecs=--specs=nano.specs
 #teensyLC.build.flags.optimize=-Os
 teensyLC.build.flags.cpp=-fno-exceptions -felide-constructors -std=gnu++0x -fno-rtti
@@ -417,7 +417,7 @@ teensy2.build.command.size=avr-size
 teensy2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD
 teensy2.build.flags.optimize=-Os
 teensy2.build.flags.cpu=-mmcu=atmega32u4
-teensy2.build.flags.defs=-DTEENSYDUINO=125
+teensy2.build.flags.defs=-DTEENSYDUINO=126
 teensy2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensy2.build.flags.c=
 teensy2.build.flags.S=-x assembler-with-cpp
@@ -532,7 +532,7 @@ teensypp2.build.command.size=avr-size
 teensypp2.build.flags.common=-g -Wall -ffunction-sections -fdata-sections -MMD
 teensypp2.build.flags.optimize=-Os
 teensypp2.build.flags.cpu=-mmcu=at90usb1286
-teensypp2.build.flags.defs=-DTEENSYDUINO=125
+teensypp2.build.flags.defs=-DTEENSYDUINO=126
 teensypp2.build.flags.cpp=-fno-exceptions -felide-constructors -std=c++0x
 teensypp2.build.flags.c=
 teensypp2.build.flags.S=-x assembler-with-cpp
