@@ -313,7 +313,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define DEVICE_POWER	0xFA
   #define VENDOR_ID		0x045e
   #define PRODUCT_ID		0x028e
-  #define MANUFACTURER_NAME	{'©','M','i','c','r','o','s','o','f','t'}
+  #define MANUFACTURER_NAME	{0x00A9,'M','i','c','r','o','s','o','f','t'}
   #define MANUFACTURER_NAME_LEN	10
   #define PRODUCT_NAME		{'C','o','n','t','r','o','l','l','e','r'}
   #define PRODUCT_NAME_LEN	10
