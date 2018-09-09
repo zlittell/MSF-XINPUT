@@ -1,6 +1,6 @@
 /* Teensyduino Core Library
  * http://www.pjrc.com/teensy/
- * Copyright (c) 2013 PJRC.COM, LLC.
+ * Copyright (c) 2017 PJRC.COM, LLC.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -43,6 +43,8 @@
 #define ENDPOINT_TRANSIMIT_ONLY		0x15
 #define ENDPOINT_RECEIVE_ONLY		0x19
 #define ENDPOINT_TRANSMIT_AND_RECEIVE	0x1D
+#define ENDPOINT_RECEIVE_ISOCHRONOUS	0x18
+#define ENDPOINT_TRANSMIT_ISOCHRONOUS	0x14
 
 /*
 Each group of #define lines below corresponds to one of the
@@ -94,7 +96,9 @@ the user.  Usually, a pair of files are added for the actual code,
 and code is also added in usb_dev.c for any control transfers,
 interrupt-level code, or other very low-level stuff not possible
 from the packet send/receive functons.  Code also is added in
-usb_inst.c to create an instance of your C++ object.
+usb_inst.c to create an instance of your C++ object.  This message
+gives a quick summary of things you will need to know:
+https://forum.pjrc.com/threads/49045?p=164512&viewfull=1#post164512
 
 You may edit the Vendor and Product ID numbers, and strings.  If
 the numbers are changed, Teensyduino may not be able to automatically
@@ -136,6 +140,39 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT3_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
 
+#elif defined(USB_KEYBOARDONLY)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x04D0
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d'}
+  #define PRODUCT_NAME_LEN	8
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         4
+  #define NUM_USB_BUFFERS	14
+  #define NUM_INTERFACE		3
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define KEYBOARD_INTERFACE    0	// Keyboard
+  #define KEYBOARD_ENDPOINT     3
+  #define KEYBOARD_SIZE         8
+  #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    2	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     4
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+
 #elif defined(USB_HID)
   #define VENDOR_ID		0x16C0
   #define PRODUCT_ID		0x0482
@@ -144,9 +181,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','J','o','y','s','t','i','c','k'}
   #define PRODUCT_NAME_LEN	23
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         5
+  #define NUM_ENDPOINTS         6
   #define NUM_USB_BUFFERS	24
-  #define NUM_INTERFACE		4
+  #define NUM_INTERFACE		5
   #define SEREMU_INTERFACE      2	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -158,19 +195,24 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define KEYBOARD_ENDPOINT     3
   #define KEYBOARD_SIZE         8
   #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    4	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     6
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
   #define MOUSE_INTERFACE       1	// Mouse
   #define MOUSE_ENDPOINT        5
   #define MOUSE_SIZE            8
   #define MOUSE_INTERVAL        1
   #define JOYSTICK_INTERFACE    3	// Joystick
   #define JOYSTICK_ENDPOINT     4
-  #define JOYSTICK_SIZE         16
+  #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
   #define JOYSTICK_INTERVAL     2
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSIMIT_ONLY
 
 #elif defined(USB_SERIAL_HID)
   #define VENDOR_ID		0x16C0
@@ -183,9 +225,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'S','e','r','i','a','l','/','K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','J','o','y','s','t','i','c','k'}
   #define PRODUCT_NAME_LEN	30
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS		6
+  #define NUM_ENDPOINTS		7
   #define NUM_USB_BUFFERS	30
-  #define NUM_INTERFACE		5
+  #define NUM_INTERFACE		6
   #define CDC_IAD_DESCRIPTOR	1
   #define CDC_STATUS_INTERFACE	0
   #define CDC_DATA_INTERFACE	1	// Serial
@@ -199,17 +241,99 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define KEYBOARD_ENDPOINT     1
   #define KEYBOARD_SIZE         8
   #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    5	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     7
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
   #define MOUSE_INTERFACE       3	// Mouse
   #define MOUSE_ENDPOINT        5
   #define MOUSE_SIZE            8
   #define MOUSE_INTERVAL        2
   #define JOYSTICK_INTERFACE    4	// Joystick
   #define JOYSTICK_ENDPOINT     6
-  #define JOYSTICK_SIZE         16
+  #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
   #define JOYSTICK_INTERVAL     1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+
+#elif defined(USB_TOUCHSCREEN)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x04D3
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','T','o','u','c','h','s','c','r','e','e','n'}
+  #define PRODUCT_NAME_LEN	20
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	15
+  #define NUM_INTERFACE		4
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define KEYBOARD_INTERFACE    0	// Keyboard
+  #define KEYBOARD_ENDPOINT     3
+  #define KEYBOARD_SIZE         8
+  #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    2	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     4
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
+  #define MULTITOUCH_INTERFACE  3	// Touchscreen
+  #define MULTITOUCH_ENDPOINT   5
+  #define MULTITOUCH_SIZE       8
+  #define MULTITOUCH_FINGERS    10
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+
+#elif defined(USB_HID_TOUCHSCREEN)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x04D4
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','T','o','u','c','h','s','c','r','e','e','n'}
+  #define PRODUCT_NAME_LEN	26
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         6
+  #define NUM_USB_BUFFERS	20
+  #define NUM_INTERFACE		5
+  #define SEREMU_INTERFACE      2	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define KEYBOARD_INTERFACE    0	// Keyboard
+  #define KEYBOARD_ENDPOINT     3
+  #define KEYBOARD_SIZE         8
+  #define KEYBOARD_INTERVAL     1
+  #define KEYMEDIA_INTERFACE    3	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     4
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
+  #define MOUSE_INTERFACE       1	// Mouse
+  #define MOUSE_ENDPOINT        6
+  #define MOUSE_SIZE            8
+  #define MOUSE_INTERVAL        2
+  #define MULTITOUCH_INTERFACE  4	// Touchscreen
+  #define MULTITOUCH_ENDPOINT   5
+  #define MULTITOUCH_SIZE       8
+  #define MULTITOUCH_FINGERS    10
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT6_CONFIG	ENDPOINT_TRANSIMIT_ONLY
@@ -233,6 +357,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define SEREMU_RX_SIZE        32
   #define SEREMU_RX_INTERVAL    2
   #define MIDI_INTERFACE        0	// MIDI
+  #define MIDI_NUM_CABLES       1
   #define MIDI_TX_ENDPOINT      3
   #define MIDI_TX_SIZE          64
   #define MIDI_RX_ENDPOINT      4
@@ -241,6 +366,164 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_MIDI4)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0485
+  #define BCD_DEVICE		0x0211
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','x','4'}
+  #define PRODUCT_NAME_LEN	13
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         4
+  #define NUM_USB_BUFFERS	16
+  #define NUM_INTERFACE		2
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define MIDI_INTERFACE        0	// MIDI
+  #define MIDI_NUM_CABLES       4
+  #define MIDI_TX_ENDPOINT      3
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      4
+  #define MIDI_RX_SIZE          64
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_MIDI16)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0485
+  #define BCD_DEVICE		0x0212
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','x','1','6'}
+  #define PRODUCT_NAME_LEN	14
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         4
+  #define NUM_USB_BUFFERS	16
+  #define NUM_INTERFACE		2
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define MIDI_INTERFACE        0	// MIDI
+  #define MIDI_NUM_CABLES       16
+  #define MIDI_TX_ENDPOINT      3
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      4
+  #define MIDI_RX_SIZE          64
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_MIDI_SERIAL)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0489
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I'}
+  #define PRODUCT_NAME_LEN	11
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	30
+  #define NUM_INTERFACE		3
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       3
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       1
+  #define MIDI_TX_ENDPOINT      4
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      5
+  #define MIDI_RX_SIZE          64
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_MIDI4_SERIAL)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0489
+  #define BCD_DEVICE		0x0211
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','x','4'}
+  #define PRODUCT_NAME_LEN	13
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	30
+  #define NUM_INTERFACE		3
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       3
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       4
+  #define MIDI_TX_ENDPOINT      4
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      5
+  #define MIDI_RX_SIZE          64
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_MIDI16_SERIAL)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0489
+  #define BCD_DEVICE		0x0212
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','x','1','6'}
+  #define PRODUCT_NAME_LEN	14
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	30
+  #define NUM_INTERFACE		3
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       3
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       16
+  #define MIDI_TX_ENDPOINT      4
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      5
+  #define MIDI_RX_SIZE          64
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_RECEIVE_ONLY
 
 #elif defined(USB_RAWHID)
   #define VENDOR_ID		0x16C0
@@ -252,7 +535,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'T','e','e','n','s','y','d','u','i','n','o',' ','R','a','w','H','I','D'}
   #define PRODUCT_NAME_LEN	18
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         6
+  #define NUM_ENDPOINTS         4
   #define NUM_USB_BUFFERS	12
   #define NUM_INTERFACE		2
   #define RAWHID_INTERFACE      0	// RawHID
@@ -304,11 +587,289 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
 
+#elif defined(USB_FLIGHTSIM_JOYSTICK)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0488
+  #define BCD_DEVICE		0x0211
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','F','l','i','g','h','t',' ','S','i','m',' ','C','o','n','t','r','o','l','s'}
+  #define PRODUCT_NAME_LEN	26
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	20
+  #define NUM_INTERFACE		3
+  #define FLIGHTSIM_INTERFACE	0	// Flight Sim Control
+  #define FLIGHTSIM_TX_ENDPOINT	3
+  #define FLIGHTSIM_TX_SIZE	64
+  #define FLIGHTSIM_TX_INTERVAL	1
+  #define FLIGHTSIM_RX_ENDPOINT	4
+  #define FLIGHTSIM_RX_SIZE	64
+  #define FLIGHTSIM_RX_INTERVAL	1
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define JOYSTICK_INTERFACE    2	// Joystick
+  #define JOYSTICK_ENDPOINT     5
+  #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
+  #define JOYSTICK_INTERVAL     1
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+
+
+#elif defined(USB_MTPDISK)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x04D1
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','T','P',' ','D','i','s','k'}
+  #define PRODUCT_NAME_LEN	15
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         4
+  #define NUM_USB_BUFFERS	20
+  #define NUM_INTERFACE		2
+  #define MTP_INTERFACE		0	// MTP Disk
+  #define MTP_TX_ENDPOINT	3
+  #define MTP_TX_SIZE		64
+  #define MTP_RX_ENDPOINT	3
+  #define MTP_RX_SIZE		64
+  #define MTP_EVENT_ENDPOINT	4
+  #define MTP_EVENT_SIZE	16
+  #define MTP_EVENT_INTERVAL	10
+  #define SEREMU_INTERFACE      1	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ONLY
+
+#elif defined(USB_AUDIO)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x04D2
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','A','u','d','i','o'}
+  #define PRODUCT_NAME_LEN	12
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         5
+  #define NUM_USB_BUFFERS	16
+  #define NUM_INTERFACE		4
+  #define SEREMU_INTERFACE      0	// Serial emulation
+  #define SEREMU_TX_ENDPOINT    1
+  #define SEREMU_TX_SIZE        64
+  #define SEREMU_TX_INTERVAL    1
+  #define SEREMU_RX_ENDPOINT    2
+  #define SEREMU_RX_SIZE        32
+  #define SEREMU_RX_INTERVAL    2
+  #define AUDIO_INTERFACE	1	// Audio (uses 3 consecutive interfaces)
+  #define AUDIO_TX_ENDPOINT     3
+  #define AUDIO_TX_SIZE         180
+  #define AUDIO_RX_ENDPOINT     4
+  #define AUDIO_RX_SIZE         180
+  #define AUDIO_SYNC_ENDPOINT	5
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+  #define ENDPOINT4_CONFIG	ENDPOINT_RECEIVE_ISOCHRONOUS
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+
+#elif defined(USB_MIDI_AUDIO_SERIAL)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x048A
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','/','A','u','d','i','o'}
+  #define PRODUCT_NAME_LEN	17
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         8
+  #define NUM_USB_BUFFERS	30
+  #define NUM_INTERFACE		6
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       3
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       1
+  #define MIDI_TX_ENDPOINT      4
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      5
+  #define MIDI_RX_SIZE          64
+  #define AUDIO_INTERFACE	3	// Audio (uses 3 consecutive interfaces)
+  #define AUDIO_TX_ENDPOINT     6
+  #define AUDIO_TX_SIZE         180
+  #define AUDIO_RX_ENDPOINT     7
+  #define AUDIO_RX_SIZE         180
+  #define AUDIO_SYNC_ENDPOINT	8
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+  #define ENDPOINT7_CONFIG	ENDPOINT_RECEIVE_ISOCHRONOUS
+  #define ENDPOINT8_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+
+#elif defined(USB_MIDI16_AUDIO_SERIAL)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x048A
+  #define BCD_DEVICE		0x0212
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'T','e','e','n','s','y',' ','M','I','D','I','x','1','6','/','A','u','d','i','o'}
+  #define PRODUCT_NAME_LEN	20
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         8
+  #define NUM_USB_BUFFERS	30
+  #define NUM_INTERFACE		6
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       3
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       16
+  #define MIDI_TX_ENDPOINT      4
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      5
+  #define MIDI_RX_SIZE          64
+  #define AUDIO_INTERFACE	3	// Audio (uses 3 consecutive interfaces)
+  #define AUDIO_TX_ENDPOINT     6
+  #define AUDIO_TX_SIZE         180
+  #define AUDIO_RX_ENDPOINT     7
+  #define AUDIO_RX_SIZE         180
+  #define AUDIO_SYNC_ENDPOINT	8
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+  #define ENDPOINT7_CONFIG	ENDPOINT_RECEIVE_ISOCHRONOUS
+  #define ENDPOINT8_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+
+#elif defined(USB_EVERYTHING)
+  #define VENDOR_ID		0x16C0
+  #define PRODUCT_ID		0x0476
+  #define RAWHID_USAGE_PAGE	0xFFAB  // recommended: 0xFF00 to 0xFFFF
+  #define RAWHID_USAGE		0x0200  // recommended: 0x0100 to 0xFFFF
+  #define DEVICE_CLASS		0xEF
+  #define DEVICE_SUBCLASS	0x02
+  #define DEVICE_PROTOCOL	0x01
+  #define MANUFACTURER_NAME	{'T','e','e','n','s','y','d','u','i','n','o'}
+  #define MANUFACTURER_NAME_LEN	11
+  #define PRODUCT_NAME		{'A','l','l',' ','T','h','e',' ','T','h','i','n','g','s'}
+  #define PRODUCT_NAME_LEN	14
+  #define EP0_SIZE		64
+  #define NUM_ENDPOINTS         15
+  #define NUM_USB_BUFFERS	31
+  #define NUM_INTERFACE		13
+  #define CDC_IAD_DESCRIPTOR	1
+  #define CDC_STATUS_INTERFACE	0
+  #define CDC_DATA_INTERFACE	1	// Serial
+  #define CDC_ACM_ENDPOINT	1
+  #define CDC_RX_ENDPOINT       2
+  #define CDC_TX_ENDPOINT       2
+  #define CDC_ACM_SIZE          16
+  #define CDC_RX_SIZE           64
+  #define CDC_TX_SIZE           64
+  #define MIDI_INTERFACE        2	// MIDI
+  #define MIDI_NUM_CABLES       16
+  #define MIDI_TX_ENDPOINT      3
+  #define MIDI_TX_SIZE          64
+  #define MIDI_RX_ENDPOINT      3
+  #define MIDI_RX_SIZE          64
+  #define KEYBOARD_INTERFACE    3	// Keyboard
+  #define KEYBOARD_ENDPOINT     4
+  #define KEYBOARD_SIZE         8
+  #define KEYBOARD_INTERVAL     1
+  #define MOUSE_INTERFACE       4	// Mouse
+  #define MOUSE_ENDPOINT        5
+  #define MOUSE_SIZE            8
+  #define MOUSE_INTERVAL        2
+  #define RAWHID_INTERFACE      5	// RawHID
+  #define RAWHID_TX_ENDPOINT    6
+  #define RAWHID_TX_SIZE        64
+  #define RAWHID_TX_INTERVAL    1
+  #define RAWHID_RX_ENDPOINT    6
+  #define RAWHID_RX_SIZE        64
+  #define RAWHID_RX_INTERVAL    1
+  #define FLIGHTSIM_INTERFACE	6	// Flight Sim Control
+  #define FLIGHTSIM_TX_ENDPOINT	9
+  #define FLIGHTSIM_TX_SIZE	64
+  #define FLIGHTSIM_TX_INTERVAL	1
+  #define FLIGHTSIM_RX_ENDPOINT	9
+  #define FLIGHTSIM_RX_SIZE	64
+  #define FLIGHTSIM_RX_INTERVAL	1
+  #define JOYSTICK_INTERFACE    7	// Joystick
+  #define JOYSTICK_ENDPOINT     10
+  #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
+  #define JOYSTICK_INTERVAL     1
+/*
+  #define MTP_INTERFACE		8	// MTP Disk
+  #define MTP_TX_ENDPOINT	11
+  #define MTP_TX_SIZE		64
+  #define MTP_RX_ENDPOINT	3
+  #define MTP_RX_SIZE		64
+  #define MTP_EVENT_ENDPOINT	11
+  #define MTP_EVENT_SIZE	16
+  #define MTP_EVENT_INTERVAL	10
+*/
+  #define KEYMEDIA_INTERFACE    8	// Keyboard Media Keys
+  #define KEYMEDIA_ENDPOINT     12
+  #define KEYMEDIA_SIZE         8
+  #define KEYMEDIA_INTERVAL     4
+  #define AUDIO_INTERFACE	9	// Audio (uses 3 consecutive interfaces)
+  #define AUDIO_TX_ENDPOINT     13
+  #define AUDIO_TX_SIZE         180
+  #define AUDIO_RX_ENDPOINT     13
+  #define AUDIO_RX_SIZE         180
+  #define AUDIO_SYNC_ENDPOINT	14
+  #define MULTITOUCH_INTERFACE  12	// Touchscreen
+  #define MULTITOUCH_ENDPOINT   15
+  #define MULTITOUCH_SIZE       8
+  #define MULTITOUCH_FINGERS    10
+  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT4_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT5_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT8_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT9_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT10_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT11_CONFIG	ENDPOINT_TRANSMIT_AND_RECEIVE
+  #define ENDPOINT12_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+  #define ENDPOINT13_CONFIG	(ENDPOINT_RECEIVE_ISOCHRONOUS|ENDPOINT_TRANSMIT_ISOCHRONOUS)
+  #define ENDPOINT14_CONFIG	ENDPOINT_TRANSMIT_ISOCHRONOUS
+  #define ENDPOINT15_CONFIG	ENDPOINT_TRANSIMIT_ONLY
+
 #elif defined(USB_XINPUT)
   #define DEVICE_CLASS	0xFF
   #define DEVICE_SUBCLASS	0xFF
   #define DEVICE_PROTOCOL	0xFF
-  #define DEVICE_VERSION 0x0114
+  #define BCD_DEVICE	0x0114
   #define DEVICE_ATTRIBUTES 0xA0
   #define DEVICE_POWER	0xFA
   #define VENDOR_ID		0x045e
@@ -333,7 +894,7 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define ENDPOINT4_CONFIG ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT5_CONFIG ENDPOINT_TRANSMIT_AND_RECEIVE
   #define ENDPOINT6_CONFIG ENDPOINT_TRANSIMIT_ONLY
-  
+
 #endif
 
 #ifdef USB_DESC_LIST_DEFINE
