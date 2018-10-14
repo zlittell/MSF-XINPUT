@@ -1,6 +1,6 @@
 /* Teensyduino Core Library
  * http://www.pjrc.com/teensy/
- * Copyright (c) 2013 PJRC.COM, LLC.
+ * Copyright (c) 2017 PJRC.COM, LLC.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -33,11 +33,11 @@
 
 #include "usb_desc.h"
 
-#if !defined(SEREMU_INTERFACE)
-
-#if F_CPU >= 20000000 && (!defined(USB_DISABLED) && !defined(USB_XINPUT))
+#if (defined(CDC_STATUS_INTERFACE) && defined(CDC_DATA_INTERFACE)) || defined(USB_DISABLED) || defined(USB_XINPUT)
 
 #include <inttypes.h>
+
+#if F_CPU >= 20000000 && !(defined(USB_DISABLED) || defined(USB_XINPUT))
 
 // C language implementation
 #ifdef __cplusplus
@@ -164,8 +164,9 @@ extern usb_serial_class Serial;
 extern void serialEvent(void);
 #endif // __cplusplus
 
+
 #endif // F_CPU
 
-#endif // ((defined(CDC_STATUS_INTERFACE) && defined(CDC_DATA_INTERFACE)) || defined(USB_DISABLED)) && !defined(SEREMU_INTERFACE)
+#endif // CDC_STATUS_INTERFACE && CDC_DATA_INTERFACE
 
 #endif // USBserial_h_
