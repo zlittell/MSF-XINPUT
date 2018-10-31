@@ -297,11 +297,6 @@ void XINPUT::sendXinput()
 {
 	//Send TXData
 	XInputUSB.send(TXData, USB_TIMEOUT);
-	
-	//Zero out data
-	//Start at 2 so that you can keep the message type and packet size
-	//Then fill the rest with 0x00's
-	for (int i=2; i<13; i++) {TXData[i] = 0x00;}
 }
 
 uint8_t XINPUT::receiveXinput()
